@@ -5,16 +5,22 @@ import {
     AccordionDetails,
     Link,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import TwoColumnLayout from "../../common/Layouts/TwoColumnLayout";
 import zlendoLogo from '../../assets/Frame.png';
+import vastu from '../../assets/Landing/vastu.png';
+import dimansionto3d from '../../assets/Landing/2dto3d.png';
+import ownplatform from '../../assets/Landing/ownplatform.png';
+import walkthrough from '../../assets/Landing/walkthrough.png';
+import walk from '../../assets/Landing/360walk.png';
+import aistyleroom from '../../assets/Landing/aistyleroom.png';
+import budget from '../../assets/Landing/budget.png';
+import designrefcul from '../../assets/Landing/designrefcul.png';
+import exportImage from '../../assets/Landing/export.png';
+import Dimension from '../../assets/Landing/Dimension.png';
+import LandingBanner from '../../assets/Landing/LandingBanner.png';
 import InfoTextBlock from "../../common/CommonInfoTextBlock/InfoTextBlock";
-import ResponsiveGridItem from "../../common/CommonSections/ResponsiveGridItem";
-import CustomButton from "../../common/CommonButton/CustomButton";
 import React from 'react';
-import { IconButton, Collapse, Divider } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
 import FaqItem from "../../common/CommonFAQ/FAQBlock";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CtaSection from "../../common/CTASection/CTASection";
@@ -82,7 +88,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
     ];
     return (
 
-        <Stack spacing={4} >
+        <Stack spacing={5} sx={{mb:2}} >
 
             <TwoColumnLayout
                 leftGrid={6}
@@ -94,7 +100,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                             sx={{
                                 color: '#29B0A1',
                                 fontFeatureSettings: "'liga' off, 'clig' off",
-                                fontFamily: 'Poppins',
+                                fontFamily: "'Nunito', sans-serif !important",
                                 fontSize: '24px',
                                 fontStyle: 'normal',
                                 fontWeight: 700,
@@ -108,7 +114,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                             sx={{
                                 color: '#3D3D3D',
                                 fontFeatureSettings: "'liga' off, 'clig' off",
-                                fontFamily: 'Poppins',
+                                fontFamily: "'Nunito', sans-serif !important",
                                 fontSize: '54px',
                                 fontStyle: 'normal',
                                 fontWeight: 700,
@@ -123,7 +129,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                             variant="subtitle1"
                             sx={{
                                 color: '#3D3D3D',
-                                fontFamily: 'Poppins',
+                                fontFamily: "'Nunito', sans-serif !important",
                                 fontSize: '20px',
                                 fontStyle: 'normal',
                                 fontWeight: 500,
@@ -150,7 +156,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 }
                 rightContent={
 
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={LandingBanner} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
                 }
             />
 
@@ -160,7 +166,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 rightGrid={6}
                 leftContent={
 
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={Dimension} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
                 rightContent={
@@ -203,7 +209,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 }
                 rightContent={
 
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={dimansionto3d} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
                 }
             />
 
@@ -211,7 +217,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 leftGrid={7}
                 rightGrid={5}
                 leftContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={walk} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
                 rightContent={
@@ -239,7 +245,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     />
                 }
                 rightContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={designrefcul} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
             />
@@ -248,7 +254,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 leftGrid={7}
                 rightGrid={5}
                 leftContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={budget} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
                 rightContent={
@@ -276,7 +282,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     />
                 }
                 rightContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={exportImage} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
             />
@@ -285,7 +291,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 leftGrid={7}
                 rightGrid={5}
                 leftContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={ownplatform} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
                 rightContent={
@@ -313,7 +319,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     />
                 }
                 rightContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={aistyleroom} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
             />
@@ -322,7 +328,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 leftGrid={7}
                 rightGrid={5}
                 leftContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={walkthrough} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
                 rightContent={
@@ -350,7 +356,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     />
                 }
                 rightContent={
-                    <img src={zlendoLogo} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
+                    <img src={vastu} alt="Zlendo Realty" style={{ width: '100%', borderRadius: 12 }} />
 
                 }
             />
@@ -368,7 +374,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     sx={{
                         color: '#3D3D3D',
                         fontFeatureSettings: "'liga' off, 'clig' off",
-                        fontFamily: 'Poppins',
+                        fontFamily: "'Nunito', sans-serif !important",
                         fontSize: '36px',
                         fontStyle: 'normal',
                         fontWeight: 700,
@@ -388,7 +394,7 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                     />
                 ))}
             </Box>
-            <Box sx={{ mb: 2 }}>
+            <Box mb={2}>
                 <CtaSection
                     title="Create your account today and get started for free!"
                     buttonText="Get Started"
@@ -396,7 +402,6 @@ const LandingScreen: React.FC<any> = ({ onClose }) => {
                 />
 
             </Box>
-
 
         </Stack>
 

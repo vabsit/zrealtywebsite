@@ -10,6 +10,16 @@ import { useEffect } from "react";
 import { useAppSelector } from "../store/store";
 import Header from "./navbar/Header";
 import LandingScreen from "./LandingScreen/LandingScreen";
+import DimensionConvertor from "./ProductsScreen/DimensionConvertor";
+import SmartRoomStyler from "./ProductsScreen/SmartRoomStyler";
+import SmartCostEstimator from "./ProductsScreen/SmartCostEstimator";
+import ZlendoApiSuite from "./ProductsScreen/ZlendoApiSuite";
+import AiRoomInspiration from "./ProductsScreen/AiRoomInspiration";
+import VRStudio from "./ProductsScreen/VRStudio";
+import HomeRemodeling from "./UseCases/HomeRemodeling";
+import IndianPartner from "./Business/IndianPartner";
+import Affiliate from "./Business/Affiliate";
+import Library from "./Library/Library";
 
 const AppRoutes = () => {
   const { userData, isAuthenticated } = useAppSelector((state) => state.authdata);
@@ -23,7 +33,8 @@ const AppRoutes = () => {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "#fff", minHeight: "100vh", pl:4, pr:4 }}>
+      {/* <Box sx={{ backgroundColor: "#fff", minHeight: "100vh", pl: 4, pr: 4, }}> */}
+      <Box sx={{ backgroundColor: "#fff", minHeight: "100vh", }}>
         <Header />
 
         <Box
@@ -39,10 +50,26 @@ const AppRoutes = () => {
               color: (theme) => theme.palette.text.primary,
               backgroundColor: "#fff", // force paper bg to be white
               minHeight: "calc(100vh - 64px)", // Adjust if header/footer heights vary
+              mt: 3
             }}
           >
             <Routes>
               <Route path="/" element={<LandingScreen />} />
+              <Route path="/2d3dconvertor" element={<DimensionConvertor />} />
+              <Route path="/smartroomstyler" element={<SmartRoomStyler />} />
+              <Route path="/smartcostestimator" element={<SmartCostEstimator />} />
+              <Route path="/zlendoapisuite" element={<ZlendoApiSuite />} />
+              <Route path="/airoominspiration" element={<AiRoomInspiration />} />
+              <Route path="/vrstudio" element={<VRStudio />} />
+
+              <Route path="/homeremodeling" element={<HomeRemodeling />} />
+
+
+              <Route path="/indianpartner" element={<IndianPartner />} />
+              <Route path="/affiliate" element={<Affiliate />} />
+
+              <Route path="/library" element={<Library />} />
+
               <Route path="/employee" element={<EmployeeList />} />
               <Route path="/dashboard" element={<Layout />} />
               <Route path="/settings/orgSettings" element={<OrganisationSettings />} />

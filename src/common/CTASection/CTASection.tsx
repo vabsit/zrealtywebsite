@@ -17,7 +17,7 @@ const CtaSection: React.FC<CtaSectionProps> = ({
     onButtonClick,
 }) => {
     return (
-        <Box sx={{ display: 'block', justifyContent: "center", alignItems: 'center', textAlign: "center" }}>
+        <Box sx={{ display: 'block', justifyContent: "center", alignItems: 'center', textAlign: "center", }} >
             {title && (
                 <Typography variant="h3" fontWeight="bold" color='#3d3d3d' mb={4} mt={1}>
                     {title}
