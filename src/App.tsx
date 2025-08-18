@@ -78,17 +78,17 @@ function App() {
         fontSize: "18px",
       },
       caption: {
-        fontSize: "12px !important",
-        fontWeight: "400",
+        fontSize: "20px !important",
+        fontWeight: "500",
         lineHeight: "1.5",
-        fontFamily: "Poppins !important",
+        fontFamily: "'Nunito', sans-serif !important",
       },
   
       body1: {
         fontSize: "12px !important",
         fontWeight: "400",
         lineHeight: "1.5",
-        fontFamily: "Poppins !important",
+        fontFamily: "'Nunito', sans-serif !important",
       },
   
       subtitle1: {
@@ -96,14 +96,19 @@ function App() {
         fontWeight: "500", // Customize the font weight
         lineHeight: "1.5",
         letterSpacing: "0.05em",
-        fontFamily: "Poppins !important",
+        fontFamily: "'Nunito', sans-serif !important",
       },
       subtitle2: {
         fontSize: "14px !important", // Customize the font size
         fontWeight: "500", // Customize the font weight
         lineHeight: "1.5",
         letterSpacing: "0.04em",
-        fontFamily: "Poppins !important", 
+        fontFamily: "'Nunito', sans-serif !important", 
+      },
+
+      h1: {
+        fontSize: "55px !important",
+        fontWeight: "500",
       },
 
       h2: {
@@ -129,7 +134,7 @@ function App() {
         fontWeight: "300",
         
       },
-      fontFamily: "Poppins",
+      fontFamily: "'Nunito', sans-serif",
       fontSize: 12,
     },
     components: {

@@ -35,7 +35,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
         <Stack width={"100%"} sx={{}}>
             {title && (
                 <Box sx={{ display: 'flex', justifyContent: "center", alignItems: 'center', textAlign: "center" }}>
-                    <Typography variant="h3" fontWeight="bold" color='#3d3d3d' mb={2}>
+                    <Typography variant="h3" fontWeight="bold" color='#3d3d3d' pb={4}>
                         {title}
                     </Typography>
                 </Box>
