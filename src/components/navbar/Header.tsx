@@ -32,7 +32,7 @@ const NavButton = styled(Button)({
   color: '#1f1f1f',
   fontWeight: 700,
   textTransform: 'none',
-  fontSize: '19px !important',
+  fontSize: '16px !important',
 });
 
 const menuStyle = {
@@ -105,7 +105,7 @@ const Header = () => {
     ],
     Resources: [
       { label: 'Library', url: '/library' },
-      { label: 'Tutorials', url: '/resources/community' },
+      { label: 'Tutorials', url: '/tutorials' },
       { label: 'Blogs', url: '/resources/support' },
       { label: 'Help Center', url: '/resources/support' },
       { label: 'Realty App', url: '/resources/support' },
@@ -129,7 +129,7 @@ const Header = () => {
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* Logo */}
         <Box sx={{ display: 'flex', alignItems: 'center' }} >
-          <img src={zlendoLogo} alt="Zlendo Realty" height="70" onClick={() => { navigate("/"); }} />
+          <img src={zlendoLogo} alt="Zlendo Realty" height="50" onClick={() => { navigate("/"); }} />
         </Box>
 
         {/* Desktop Navigation */}

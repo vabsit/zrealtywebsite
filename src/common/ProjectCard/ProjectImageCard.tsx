@@ -58,7 +58,7 @@ const ProjectCard: React.FC<Project> = ({
                 image={image}
                 alt={userName}
                 sx={{
-                    height: 200,
+                    height: 150,
                     objectFit: "cover",
                 }}
             />
@@ -135,13 +135,14 @@ const CustomProjectCard: React.FC<CustomProjectCardProps> = ({
     };
 
     return (
-        <Box px={6}>
+        <Box px={3}>
             {/* Cards */}
             <Box
                 sx={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
                     gap: 3,
+                    padding:{sm:"20px"}
                 }}
             >
                 {paginatedData.map((p, i) => (

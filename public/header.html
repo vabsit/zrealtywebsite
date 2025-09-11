@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zlendo - Complete Header</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="/zlendostyle.css"
+      rel="stylesheet"
+    />
+    <style>
+      .dropdown-toggle::after {
+        transition: transform 0.3s ease-in-out 0.1s !important;
+      }
+
+      .dropdown-toggle:hover::after,
+      .dropdown-toggle.show::after {
+        transform: rotate(180deg) !important;
+      }
+      li {
+        padding: 0px !important;
+      }
+      :root {
+        --orange: #ff6b00;
+        --orange-light: #fff0e6;
+      }
+
+      .text-orange {
+        color: var(--orange) !important;
+      }
+
+      .btn-outline-orange {
+        color: var(--orange) !important;
+        border-color: var(--orange) !important;
+      }
+
+      .btn-outline-orange:hover {
+        background-color: var(--orange) !important;
+        color: white !important;
+      }
+
+      .btn-orange {
+        background-color: var(--orange) !important;
+        color: white !important;
+      }
+
+      .btn-orange:hover {
+        background-color: #e55d00 !important;
+        color: white !important;
+      }
+
+      .web-header {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Desktop Mega Menu Styles */
+      .mega-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .prd-mmenu .dropdown-menu {
+        padding: 0;
+      }
+
+      .tab-card {
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 1px solid transparent;
+      }
+
+      .tab-card.active,
+      .tab-card:hover {
+        border-color: var(--orange);
+        background-color: var(--orange-light);
+      }
+
+      .app-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .mega-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        color: #495057;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+      }
+
+      .mega-tabs .nav-link.active {
+        background-color: var(--orange-light);
+        color: var(--orange);
+        font-weight: 600;
+      }
+
+      .prod-hov-fx {
+        transition: all 0.2s;
+        border-radius: 6px;
+      }
+
+      .prod-hov-fx:hover {
+        background-color: #f8f9fa;
+        text-decoration: none;
+      }
+
+      /* Mobile Menu Styles */
+      .mob-head-bar {
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+      }
+
+      .menu-toggle-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      #mobileMenu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100%;
+        background: white;
+        z-index: 1030;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+      }
+
+      #mobileMenu.show {
+        right: 0;
+      }
+
+      .menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      #mobileMenu ul {
+        list-style: none;
+        padding-left: 10px;
+        margin-top: 0;
+      }
+
+      #mobileMenu > ul > li {
+        margin-bottom: 0;
+      }
+
+      #mobileMenu a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        color: #333;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+
+      #mobileMenu a:not([href]) {
+        cursor: pointer;
+      }
+
+      .mobile-submenu,
+      .nested-submenu,
+      .inner-submenu {
+        display: none;
+        padding-left: 1rem;
+        border-left: 2px solid transparent;
+      }
+
+      .mobile-submenu.active,
+      .nested-submenu.active,
+      .inner-submenu.active {
+        display: block;
+        padding-left: 5px;
+      }
+
+      .toggle-chevron {
+        transition: transform 0.3s;
+      }
+
+      .toggle-chevron.rotated {
+        transform: rotate(90deg);
+      }
+
+      /* Custom layout for left logo, left menu, right contact */
+      .custom-navbar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 75px;
+      }
+
+      .navbar-brand {
+        margin-right: 2rem;
+      }
+
+      .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .navbar-nav .nav-item {
+        margin-right: 1.5rem;
+        position: static;
+      }
+
+      .nav-contact-btn {
+        margin-left: auto;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 1199.98px) {
+        .navbar-nav .nav-item {
+          margin-right: 1rem;
+        }
+
+        .tab-card {
+          padding: 0.75rem;
+        }
+
+        .tab-card h6 {
+          font-size: 0.9rem;
+        }
+
+        .tab-card p {
+          font-size: 0.8rem;
+        }
+      }
+      @media (max-width: 991.98px) {
+        .web-header {
+          display: none;
+        }
+
+        .mob-head-bar {
+          display: flex !important;
+        }
+      }
+
+      @media (min-width: 992px) {
+        /* .mob-head-bar,
+        #mobileMenu {
+          display: none;
+        } */
+
+        .web-header {
+          display: block !important;
+        }
+      }
+
+      @media (max-width: 575.98px) {
+        #productTabs {
+          flex-direction: column;
+        }
+      }
+
+      /* Demo content styles */
+      .hero-section {
+        background-size: cover;
+        background-position: center;
+        color: white;
+        /* padding: 100px 0; */
+        text-align: center;
+      }
+
+      .feature-box {
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        height: 100%;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .roundness-2 {
+        border-radius: 8px;
+      }
+
+      .object-fit-cover {
+        object-fit: cover;
+      }
+      @media (min-width: 768px) and (max-width: 991.98px) {
+        /* Adjust mobile header for tablet */
+        .mob-head-bar {
+          padding: 0.5rem 1rem;
+        }
+
+        /* Improve mobile menu for tablet */
+        #mobileMenu {
+          width: 60%;
+        }
+
+        .menu-header {
+          padding: 1rem;
+        }
+
+        #mobileMenu a {
+          padding: 1rem 0;
+          font-size: 1.1rem;
+        }
+
+        /* Adjust logo size */
+        .mob-head-bar img {
+          height: 35px !important;
+        }
+      }
+
+      /* For very small tablets, show a simplified desktop header */
+      @media (min-width: 768px) and (max-width: 850px) {
+        .web-header {
+          display: none !important;
+        }
+
+        #mobileMenu {
+          width: 60%;
+        }
+
+        .mob-head-bar {
+          display: flex  !important;
+        }
+
+        /* Simplify desktop navbar for small tablets */
+        .custom-navbar {
+          height: 65px;
+          padding: 0 1rem;
+        }
+
+        .navbar-nav .nav-item {
+          margin-right: 0.7rem;
+        }
+
+        .nav-link {
+          font-size: 0.9rem;
+        }
+
+        .navbar-brand {
+          margin-right: 1rem;
+        }
+
+        .navbar-brand img {
+          width: 100px !important;
+          height: 30px !important;
+        }
+
+        /* Hide mega menu dropdowns on small tablets */
+        .dropdown-menu {
+          transform: translateX(-50%) !important;
+          left: 50% !important;
+          width: 90vw !important;
+          max-width: 400px;
+        }
+
+        /* Adjust contact button */
+        .nav-contact-btn .btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+        }
+        .desktop-header {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <body>
+    <!-- Desktop Header -->
+    <header class="bg-white web-header desktop-header">
+      <div style="padding-right: 20px; padding-left: 20px">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <div class="custom-navbar">
+            <!-- Logo on the left -->
+            <a class="navbar-brand" href="index.html">
+              <img
+                loading="lazy"
+                src="/logo-main.svg"
+                alt="Zlendo
+              Logo"
+                class="img-fluid"
+                style="width: 120px; height: 35px !important"
+              />
+            </a>
+
+            <!-- Navigation menu -->
+            <ul class="navbar-nav">
+              <!-- Products Mega Menu -->
+              <li class="nav-item dropdown position-static prd-mmenu">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Products
+                </a>
+                <div
+                  class="dropdown-menu mega-menu py-4 px-3 w-100"
+                  id="productsMega"
+                >
+                  <div class="container" onclick="event.stopPropagation();">
+                    <!-- Tab Selectors -->
+                    <div
+                      class="d-flex flex-column flex-md-row gap-3 mb-4"
+                      id="productTabs"
+                    >
+                      <!-- Zlendo Suite -->
+                      <div class="tab-card active" data-bs-target="#suite">
+                        <div>
+                          <h6 class="mb-1">Zlendo Suite</h6>
+                          <p class="small text-muted mb-0">
+                            One Stop Shop to Benefit Businesses
+                          </p>
+                        </div>
+                        <a
+                          href="/zsuite/index.html"
+                          class="btn btn-outline-orange btn-sm mt-2"
+                          >Zlendo Suite</a
+                        >
+                      </div>
+                      <!-- Zlendo Realty -->
+                      <div class="tab-card" data-bs-target="#realty">
+                        <div>
+                          <h6 class="mb-1">Zlendo Realty</h6>
+                          <p class="small text-muted mb-0">
+                            All-in-One AI Home Design Software
+                          </p>
+                        </div>
+                        <a
+                          href="/zlendo_realty/index.html"
+                          class="btn btn-outline-orange btn-sm mt-2"
+                          >Zlendo Realty</a
+                        >
+                      </div>
+                      <!-- Zlendo AI -->
+                      <div class="tab-card" data-bs-target="#ai">
+                        <div>
+                          <h6 class="mb-1">Zlendo AI</h6>
+                          <p class="small text-muted mb-0">
+                            AI-powered Business Tools
+                          </p>
+                        </div>
+                        <a
+                          href="/zsuite/zlendoai.html"
+                          class="btn btn-outline-orange btn-sm mt-2"
+                          >Zlendo AI</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Tab Contents -->
+                    <div class="tab-content" id="productTabContent">
+                      <!-- Zlendo Suite Tab -->
+                      <div class="tab-pane fade show active" id="suite">
+                        <div class="row g-3">
+                          <!-- Zlendo People -->
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <img
+                                  src="assets/images/logos/zlendo-people-icon.svg"
+                                  alt="Zlendo People"
+                                  class="app-icon me-2"
+                                />
+                                <div>
+                                  <h6>Zlendo People</h6>
+                                  <p class="text-muted small">
+                                    End-to-end HR management for modern
+                                    organizations.
+                                  </p>
+                                  <a
+                                    href="/zsuite/zlendopeople-people.html"
+                                    class="text-orange"
+                                    >Explore Zlendo People</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Zlendo Payroll -->
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <img
+                                  src="assets/images/logos/zlendo-payroll.svg"
+                                  alt="Zlendo Payroll"
+                                  class="app-icon me-2"
+                                />
+                                <div>
+                                  <h6>Zlendo Payroll</h6>
+                                  <p class="text-muted small">
+                                    Automated payroll processing and compliance.
+                                  </p>
+                                  <a
+                                    href="/zsuite/zlendopeople-payroll.html"
+                                    class="text-orange"
+                                    >Explore Zlendo Payroll</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Zlendo Timesheet -->
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <img
+                                  src="assets/images/logos/zlendo-timesheet.svg"
+                                  alt="Zlendo Timesheet"
+                                  class="app-icon me-2"
+                                />
+                                <div>
+                                  <h6>Zlendo Timesheet</h6>
+                                  <p class="text-muted small">
+                                    Track and manage employee work hours
+                                    effortlessly.
+                                  </p>
+                                  <a
+                                    href="/zsuite/zlendopeople-timesheet.html"
+                                    class="text-orange"
+                                    >Explore Zlendo Timesheet</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Zlendo Leave Management -->
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <img
+                                  src="assets/images/logos/zlendo-lms.svg"
+                                  alt="Zlendo LMS"
+                                  class="app-icon me-2"
+                                />
+                                <div>
+                                  <h6>Zlendo Leave Management</h6>
+                                  <p class="text-muted small">
+                                    Manage employee leaves with ease and
+                                    transparency.
+                                  </p>
+                                  <a
+                                    href="/zsuite/zlendopeople-lms.html"
+                                    class="text-orange"
+                                    >Explore Zlendo LMS</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Realty -->
+                      <div class="tab-pane fade" id="realty">
+                        <div class="row g-3">
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>2D to 3D Converter</h6>
+                                <p class="text-muted small">
+                                  Convert 2D floor plans into stunning 3D models
+                                  instantly.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/2dto3dConvertor.html"
+                                  class="text-orange"
+                                  >Explore Now</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>Room Styling</h6>
+                                <p class="text-muted small">
+                                  Visualize and customize interiors with
+                                  AI-powered styling.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/SmartRoomStyler.html"
+                                  class="text-orange"
+                                  >Discover More</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>Cost Estimation</h6>
+                                <p class="text-muted small">
+                                  Get instant cost estimation for your projects.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/SmartCostEstimator.html"
+                                  class="text-orange"
+                                  >Learn More</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>Vastu & Localization</h6>
+                                <p class="text-muted small">
+                                  Ensure your designs align with Vastu
+                                  principles.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/VasthuLayout.html"
+                                  class="text-orange"
+                                  >Explore More</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>VR Experience Center</h6>
+                                <p class="text-muted small">
+                                  Immerse clients in projects using VR
+                                  walkthroughs.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/VRStudio.html"
+                                  class="text-orange"
+                                  >Discover Now</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <h6>Export to GLB/FBX</h6>
+                                <p class="text-muted small">
+                                  Seamless export of models to industry-standard
+                                  formats.
+                                </p>
+                                <a
+                                  href="/zlendo_realty/components/Products/3dExport.html"
+                                  class="text-orange"
+                                  >Learn More</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Zlendo AI Tab -->
+                      <div class="tab-pane fade" id="ai">
+                        <div class="row g-3">
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <div>
+                                  <img
+                                    src="assets/images/logos/Idox.png"
+                                    alt="Zlendo iDocX"
+                                    class="app-icon me-2"
+                                  />
+                                  <h6>Zlendo iDocX</h6>
+                                  <p class="text-muted small">
+                                    AI-powered document processing for
+                                    businesses.
+                                  </p>
+                                  <a
+                                    href="/Idocx/Index.html"
+                                    class="text-orange"
+                                    >Explore iDocX</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <div>
+                                  <div>
+                                    <img
+                                      src="assets/images/logos/Isumise.png"
+                                      alt="Zlendo iSummize"
+                                      class="app-icon me-2"
+                                    />
+                                    <h6>Zlendo iSummize</h6>
+                                    <p class="text-muted small">
+                                      Summarize large documents with AI
+                                      precision.
+                                    </p>
+                                    <a
+                                      href="/isummize/Index.html"
+                                      class="text-orange"
+                                      >Explore iSummize</a
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <div>
+                                  <h6>Knowledge Management</h6>
+                                  <p class="text-muted small">
+                                    
+                                  </p>
+                                  <a href="#" class="text-orange"
+                                    >Explore Knowledge Management</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                            <div class="card h-100">
+                              <div class="card-body">
+                                <div>
+                                  <h6>Cyber Security</h6>
+                                  <p class="text-muted small">
+                                    Protect your data with advanced AI security
+                                    tools.
+                                  </p>
+                                  <a href="#" class="text-orange"
+                                    >Explore Cyber Security</a
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Solutions Mega Menu -->
+              </li>
+
+              <li class="nav-item dropdown position-static">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >Solutions</a
+                >
+                <div class="dropdown-menu mega-menu py-4 px-2">
+                  <div class="container">
+                    <div class="row g-1 align-items-stretch">
+                      <!-- Left Menu -->
+                      <div class="col-md-3">
+                        <ul
+                          class="nav flex-column nav-pills mega-tabs gap-2"
+                          role="tablist"
+                        >
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="pill"
+                              href="#solPredictive"
+                              >Predictive Analytics</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#solAutomation"
+                              >Process Automation</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#solIoT"
+                              >Industrial IoT</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#solCustomer"
+                              >Customer Experience</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#solData"
+                              >Data Engineering</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#solSupply"
+                              >Supply Chain AI</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Right Content -->
+                      <div class="col-md-9">
+                        <div class="tab-content p-3">
+                          <div
+                            class="tab-pane fade show active"
+                            id="solPredictive"
+                          >
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Predictive Analytics</h5>
+                                <p class="text-muted mb-2">
+                                  Anticipate trends and make informed decisions
+                                  using AI-driven forecasting.
+                                </p>
+                                <a
+                                  href="predictive-analytics.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/predictive_analytics.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Predictive"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="solAutomation">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Process Automation</h5>
+                                <p class="text-muted mb-2">
+                                  Automate business operations with intelligent
+                                  workflows and bots.
+                                </p>
+                                <a
+                                  href="process-automation.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/process_automation.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Automation"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="solIoT">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Industrial IoT</h5>
+                                <p class="text-muted mb-2">
+                                  Capture and analyze data from connected
+                                  devices across your enterprise.
+                                </p>
+                                <a
+                                  href="iot-experience.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/industrial_iot.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="IoT"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="solCustomer">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Customer Experience AI</h5>
+                                <p class="text-muted mb-2">
+                                  Enhance engagement through personalized
+                                  AI-powered experiences.
+                                </p>
+                                <a
+                                  href="customer-experience.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/customer_ experience_ai.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Customer Experience"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="solData">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Data Engineering</h5>
+                                <p class="text-muted mb-2">
+                                  Build scalable, real-time data pipelines and
+                                  infrastructure.
+                                </p>
+                                <a
+                                  href="data-engineering.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/data_engineering.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Data Engineering"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="solSupply">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Supply Chain AI</h5>
+                                <p class="text-muted mb-2">
+                                  Optimize supply and logistics with real-time
+                                  AI-driven analytics.
+                                </p>
+                                <a
+                                  href="supply-chain.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/solutions/supply.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Supply Chain AI"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Services Mega Menu -->
+              <li class="nav-item dropdown position-static">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >Services</a
+                >
+                <div
+                  class="dropdown-menu mega-menu py-4 px-2"
+                  id="servicesMega"
+                >
+                  <div class="container">
+                    <div class="row g-1 align-items-stretch">
+                      <!-- Left Tabs -->
+                      <div class="col-md-3">
+                        <ul
+                          class="nav flex-column nav-pills mega-tabs gap-2"
+                          role="tablist"
+                        >
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="pill"
+                              href="#srvAI"
+                              >Zlendo AI Services</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvDev"
+                              >Software Development</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvDelivery"
+                              >Delivery</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvConsulting"
+                              >Consulting</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvTesting"
+                              >Software Testing</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvERP"
+                              >ERP</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#srvMS"
+                              >Microsoft Tech Stack</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Right Tab Content -->
+                      <div class="col-md-9">
+                        <div class="tab-content p-3">
+                          <!-- Zlendo AI Services -->
+                          <div class="tab-pane fade show active" id="srvAI">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>AI Services</h5>
+                                <p class="text-muted mb-2">
+                                  Leverage our AI expertise to automate
+                                  workflows, gain insights, and boost
+                                  efficiency.
+                                </p>
+                                <a
+                                  href="ai-services.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/ai-serv.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Zlendo AI Graphic"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Software Development -->
+                          <div class="tab-pane fade" id="srvDev">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>Software Development</h5>
+                                <p class="text-muted mb-2">
+                                  Build high-quality software tailored to your
+                                  enterprise workflows.
+                                </p>
+                                <a
+                                  href="software-dev.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                                <div class="row g-2">
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="web-app-dev.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>Web Development</strong><br />
+                                      <small class="text-muted"
+                                        >Responsive, scalable websites &
+                                        portals.</small
+                                      >
+                                    </a>
+                                  </div>
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="mobile-app-dev.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>Mobile App Development</strong
+                                      ><br />
+                                      <small class="text-muted"
+                                        >Cross-platform mobile apps for iOS &
+                                        Android.</small
+                                      >
+                                    </a>
+                                  </div>
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="custom-software-dev.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong
+                                        >Custom Software Development</strong
+                                      ><br />
+                                      <small class="text-muted"
+                                        >Building tailor made softwares for your
+                                        specific needs.</small
+                                      >
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/software-dev.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Software Development"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Software Delivery -->
+                          <div class="tab-pane fade" id="srvDelivery">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>Software Delivery</h5>
+                                <p class="text-muted mb-2">
+                                  Ensure timely execution and go-to-market
+                                  delivery through agile project management.
+                                </p>
+                                <a
+                                  href="delivery.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                                <div class="row g-2">
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="it-staff-augmentation.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>Staff Augmentation</strong><br />
+                                      <small class="text-muted"
+                                        >Flexibility for the fast paced
+                                        execution.</small
+                                      >
+                                    </a>
+                                  </div>
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="end-to-end-development.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>End To End Development</strong
+                                      ><br />
+                                      <small class="text-muted"
+                                        >Continuous integration &
+                                        Delivery</small
+                                      >
+                                    </a>
+                                  </div>
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="software-project-outsourcing.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong
+                                        >Software Project Outsourcing</strong
+                                      ><br />
+                                      <small class="text-muted"
+                                        >Accelerate product delivery and reduce
+                                        risk with end-to-end software
+                                        execution.</small
+                                      >
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/delivery.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Software Development"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Consulting -->
+                          <div class="tab-pane fade" id="srvConsulting">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>Consulting</h5>
+                                <p class="text-muted mb-2">
+                                  Get expert advice to optimize operations,
+                                  reduce costs, and improve technology ROI.
+                                </p>
+                                <a
+                                  href="consulting.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/consulting.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Consulting Graphic"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Software Testing -->
+                          <div class="tab-pane fade" id="srvTesting">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>Software Testing</h5>
+                                <p class="text-muted mb-2">
+                                  Deliver quality software through automated and
+                                  manual testing practices.
+                                </p>
+                                <a
+                                  href="software-testing.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/software-test.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Testing Graphic"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- ERP -->
+                          <div class="tab-pane fade" id="srvERP">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>ERP</h5>
+                                <p class="text-muted mb-2">
+                                  Centralize your data and operations with
+                                  robust enterprise resource planning solutions.
+                                </p>
+                                <a
+                                  href="erp.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                                <div class="row g-2">
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="sap.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>SAP Integration</strong><br />
+                                      <small class="text-muted"
+                                        >Seamless SAP environment
+                                        connectivity.</small
+                                      >
+                                    </a>
+                                  </div>
+                                  <div class="col-6 tool-item">
+                                    <a
+                                      href="salesforce.html"
+                                      class="prod-hov-fx d-block p-2 roundness-2"
+                                    >
+                                      <strong>Salesforce</strong><br />
+                                      <small class="text-muted"
+                                        >Built for your business
+                                        processes.</small
+                                      >
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/erp.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="ERP Graphic"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Microsoft Tech Stack -->
+                          <div class="tab-pane fade" id="srvMS">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>Microsoft Tech Stack</h5>
+                                <p class="text-muted mb-2">
+                                  Tap into our Microsoft ecosystem expertise
+                                  across cloud, apps, and services.
+                                </p>
+                                <a
+                                  href="ms-techstack.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/services/ms-tech-stack.png"
+                                  class="img-fluid rounded object-fit-cover"
+                                  alt="Microsoft Stack Graphic"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="case-studies.html">Case Studies</a>
+              </li>
+
+              <!-- About Us Mega Menu -->
+              <li class="nav-item dropdown position-static">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >About</a
+                >
+                <div class="dropdown-menu mega-menu py-4 px-2">
+                  <div class="container">
+                    <div class="row g-1 align-items-stretch">
+                      <!-- Left Tabs -->
+                      <div class="col-md-3">
+                        <ul
+                          class="nav flex-column nav-pills mega-tabs gap-2"
+                          role="tablist"
+                        >
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="pill"
+                              href="#abtUs"
+                              >About Us</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#abtCareers"
+                              >Careers</a
+                            >
+                          </li>
+                          <li
+                            class="nav-item"
+                            style="padding-bottom: 0 !important"
+                          >
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="pill"
+                              href="#abtClients"
+                              >Clients</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Right Tab Content -->
+                      <div class="col-md-9">
+                        <div class="tab-content p-3">
+                          <!-- About Us -->
+                          <div class="tab-pane fade show active" id="abtUs">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <h5>About Us</h5>
+                                <p class="text-muted mb-2">
+                                  Discover who we are, our values, and the
+                                  mission that drives us to innovate and empower
+                                  businesses with cutting-edge solutions.
+                                </p>
+                                <a
+                                  href="about-us.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-5 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/about/about-us.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="About Us"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Careers -->
+                          <div class="tab-pane fade" id="abtCareers">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h5>Careers</h5>
+                                <p class="text-muted mb-2">
+                                  Join our dynamic team of innovators and
+                                  creators. Explore exciting career
+                                  opportunities and grow with us.
+                                </p>
+                                <a
+                                  href="careers.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/about/careers.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Careers"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Clients -->
+                          <div class="tab-pane fade" id="abtClients">
+                            <div class="row">
+                              <div class="col-md-6 " >
+                                <h5>Clients</h5>
+                                <p class="text-muted mb-2" >
+                                  See how we've delivered transformative
+                                  solutions to clients across industries.
+                                  Trusted by leaders worldwide.
+                                </p>
+                                <a
+                                  href="our-clients.html"
+                                  class="text-orange d-block mb-3"
+                                  >Learn More</a
+                                >
+                              </div>
+                              <div class="col-md-6 d-none d-md-block">
+                                <img
+                                  loading="lazy"
+                                  src="assets/images/about/client.png"
+                                  class="img-fluid rounded w-100 object-fit-cover"
+                                  alt="Clients"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Contact Us button on the right -->
+            <div class="nav-contact-btn">
+              <a
+                href="contact-us.php"
+                class="btn btn-orange"
+                style="padding: 11px 22px; border-radius: 123px"
+                >Contact Us</a
+              >
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Header -->
+    <div
+      class="d-md-none d-flex justify-content-between align-items-center p-3 border-bottom mob-head-bar"
+    >
+      <a href="index.html" class="d-inline-block">
+        <img
+          loading="lazy"
+          src="/assets/images/logo-main.svg"
+          style="height: 40px"
+          alt="Zlendo Logo"
+          class="img-fluid"
+        />
+      </a>
+      <button class="menu-toggle-btn" onclick="toggleMenu()">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu">
+      <div class="menu-header mb-3">
+        <a href="index.html" class="d-inline-block">
+          <img
+            loading="lazy"
+            src="/assets/images/logo-main.svg"
+            style="height: 40px"
+            alt="Zlendo Logo"
+            class="img-fluid"
+          />
+        </a>
+        <button class="menu-toggle-btn" onclick="toggleMenu()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <ul>
+        <!-- Products -->
+        <li>
+          <a onclick="toggleSubmenu(this)"
+            >Products <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <!-- Zlendo Suite Accordion -->
+            <li>
+              <a onclick="toggleInnerAccordion(this)"
+                >Zlendo Suite <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="inner-submenu">
+                <li>
+                  <a href="/zsuite/index.html">Explore Zlendo Suite</a>
+                </li>
+                <li>
+                  <a href="/zsuite/zlendopeople-people.html">Zlendo People</a>
+                </li>
+                <li>
+                  <a href="/zsuite/zlendopeople-payroll.html">Zlendo Payroll</a>
+                </li>
+                <li>
+                  <a href="/zsuite/zlendopeople-timesheet.html"
+                    >Zlendo Timesheet</a
+                  >
+                </li>
+                <li>
+                  <a href="/zsuite/zlendopeople-lms.html">Leave Management</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Zlendo Realty Accordion -->
+            <li>
+              <a onclick="toggleInnerAccordion(this)"
+                >Zlendo Realty <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="inner-submenu">
+                <li>
+                  <a href="/zlendo_realty/index.html">Explore Zlendo Realty</a>
+                </li>
+                <li>
+                  <a
+                    href="/zlendo_realty/components/Products/2dto3dConvertor.html"
+                    >2D → 3D Converter</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/zlendo_realty/components/Products/SmartRoomStyler.html"
+                    >Room Styling</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/zlendo_realty/components/Products/SmartCostEstimator.html"
+                    >Cost Estimation</a
+                  >
+                </li>
+                <li>
+                  <a href="/zlendo_realty/components/Products/VasthuLayout.html"
+                    >Vastu & Localization</a
+                  >
+                </li>
+                <li>
+                  <a href="/zlendo_realty/components/Products/VRStudio.html"
+                    >VR Experience Center</a
+                  >
+                </li>
+                <li>
+                  <a href="/zlendo_realty/components/Products/3dExport.html"
+                    >Export to GLB/FBX</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <!-- Zlendo AI Accordion -->
+            <li>
+              <a onclick="toggleInnerAccordion(this)"
+                >Zlendo AI <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="inner-submenu">
+                <li><a href="/zsuite/zlendoai.html">Explore Zlendo AI</a></li>
+                <li><a href="/Idocx/Index.html">Zlendo iDocX</a></li>
+                <li><a href="/isummize/Index.html">Zlendo iSummize</a></li>
+                <!-- <li><a href="#">Knowledge Management</a></li>
+                <li><a href="#">Cyber Security</a></li> -->
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Services -->
+        <li>
+          <a onclick="toggleSubmenu(this)"
+            >Services <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li><a href="ai-services.html">AI Services</a></li>
+
+            <li>
+              <a onclick="toggleSubmenu(this)"
+                >Software Development
+                <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="nested-submenu">
+                <li><a href="software-dev.html">Software Dev</a></li>
+                <li><a href="web-app-dev.html">Web Dev</a></li>
+                <li><a href="mobile-app-dev.html">Mobile Dev</a></li>
+                <li><a href="custom-software-dev.html">Custom Dev</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a onclick="toggleSubmenu(this)"
+                >Delivery <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="nested-submenu">
+                <li><a href="delivery.html">Software Delivery</a></li>
+                <li>
+                  <a href="it-staff-augmentation.html">Staff Augmentation</a>
+                </li>
+                <li><a href="end-to-end-development.html">End-to-End</a></li>
+                <li>
+                  <a href="software-project-outsourcing.html">Outsourcing</a>
+                </li>
+              </ul>
+            </li>
+
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="software-testing.html">Testing</a></li>
+
+            <li>
+              <a onclick="toggleSubmenu(this)"
+                >ERP <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="nested-submenu">
+                <li><a href="erp.html">ERP</a></li>
+                <li><a href="sap.html">SAP</a></li>
+                <li><a href="salesforce.html">Salesforce</a></li>
+              </ul>
+            </li>
+
+            <li><a href="ms-techstack.html">Microsoft Tech Stack</a></li>
+          </ul>
+        </li>
+
+        <!-- Solutions -->
+        <li>
+          <a onclick="toggleSubmenu(this)"
+            >Solutions <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li>
+              <a href="predictive-analytics.html">Predictive Analytics</a>
+            </li>
+            <li><a href="process-automation.html">Process Automation</a></li>
+            <li><a href="iot-experience.html">IoT</a></li>
+            <li><a href="customer-experience.html">Customer Experience</a></li>
+            <li><a href="data-engineering.html">Data Engineering</a></li>
+            <li><a href="supply-chain.html">Supply Chain AI</a></li>
+          </ul>
+        </li>
+
+        <!-- About Us -->
+        <li>
+          <a onclick="toggleSubmenu(this)"
+            >About Us <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="our-clients.html">Clients</a></li>
+          </ul>
+        </li>
+
+        <!-- Case Studies -->
+        <li><a href="case-studies.html">Case Studies</a></li>
+
+        <!-- CTA -->
+        <li>
+          <a
+            href="contact-us.php"
+            class="d-inline-block btn-orange btn-padding w-100 text-center text-white border rounded py-2 mt-2"
+            >Contact Us</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+      // Function to toggle mobile menu
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("show");
+      }
+
+      // Function to toggle submenus in mobile view
+      function toggleSubmenu(element) {
+        const submenu = element.nextElementSibling;
+        const chevron = element.querySelector(".toggle-chevron");
+
+        if (submenu.style.display === "block") {
+          submenu.style.display = "none";
+          chevron.classList.remove("rotated");
+        } else {
+          submenu.style.display = "block";
+          chevron.classList.add("rotated");
+        }
+      }
+
+      // Function to toggle inner accordion menus
+      function toggleInnerAccordion(element) {
+        const innerSubmenu = element.nextElementSibling;
+        const chevron = element.querySelector(".toggle-chevron");
+
+        if (innerSubmenu.style.display === "block") {
+          innerSubmenu.style.display = "none";
+          chevron.classList.remove("rotated");
+        } else {
+          innerSubmenu.style.display = "block";
+          chevron.classList.add("rotated");
+        }
+      }
+
+      // Initialize tab functionality for product tabs
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabCards = document.querySelectorAll(".tab-card");
+
+        tabCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            // Remove active class from all tabs
+            tabCards.forEach((c) => c.classList.remove("active"));
+
+            // Add active class to clicked tab
+            this.classList.add("active");
+
+            // Show corresponding tab content
+            const target = this.getAttribute("data-bs-target");
+            const tabPanes = document.querySelectorAll(".tab-pane");
+
+            tabPanes.forEach((pane) => {
+              pane.classList.remove("show", "active");
+            });
+
+            document.querySelector(target).classList.add("show", "active");
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener("click", function (event) {
+          const mobileMenu = document.getElementById("mobileMenu");
+          const menuToggle = document.querySelector(".menu-toggle-btn");
+
+          if (
+            mobileMenu.classList.contains("show") &&
+            !mobileMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
+          ) {
+            mobileMenu.classList.remove("show");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -13,9 +13,9 @@ const StyledChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "selected",
 })<{ selected?: boolean }>(({ theme, selected }) => ({
   borderRadius: "12px",
-  fontSize: "20px",
+  fontSize: "18px",
   fontWeight: 500,
-  padding: "19px 10px",
+  padding: "17px 8px",
   border: `1px solid ${selected ? "transparent" : "#4CB79E"}`,
   background: selected ? "#21b9ad" : "transparent",
   color: selected ? "#fff" : "#383838",
@@ -24,7 +24,7 @@ const StyledChip = styled(Chip, {
     borderColor: "#4CB79E",
   },
   "& .MuiChip-label": {
-    padding: "0 12px",
+    padding: "0 3px",
   },
 }));
 

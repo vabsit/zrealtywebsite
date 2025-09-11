@@ -17,7 +17,9 @@ import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { loginresponse } from "../../utils/SampletestDatas";
-
+import { Breadcrumbs, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 
 interface AddorEditApplicationProps {
@@ -31,6 +33,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const navigate = useNavigate();
 
     // const images = [
     //     { src: HomeOwner, thumb: HomeModelingBanner },
@@ -99,12 +102,76 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
     };
     console.log("CardData", CardData);
 
+    const handleClick = (path: string) => {
+        navigate(path);
+    };
 
     return (
 
         <>
             <Stack spacing={6} sx={{ mb: 2, }}>
                 <Box >
+                    <Box sx={{pb:3}}>
+                        <Breadcrumbs
+                            separator={
+                                <NavigateNextIcon sx={{ fontSize: "24px", color: "#929292" }} /> // arrow size & color
+                            }
+                            aria-label="breadcrumb"
+                        >
+                            <Link
+                                underline="hover"
+                                sx={{
+                                    cursor: "pointer",
+                                    color: "#929292",
+                                    fontFamily: "Nunito, sans-serif",
+                                    fontSize: "18px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "12px", // 60%
+                                    letterSpacing: "0.5px",
+                                }}
+                                onClick={() => handleClick("/")}
+                            >
+                                Home
+                            </Link>
+
+                            <Link
+                                underline="hover"
+                                sx={{
+                                    cursor: "pointer",
+                                    color: "#929292",
+                                    fontFamily: "Nunito, sans-serif",
+                                    fontSize: "18px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "12px", // 60%
+                                    letterSpacing: "0.5px",
+                                }}
+                                onClick={() => closeBasicDetails()}
+                            >
+                                Library
+                            </Link>
+
+                            <Link
+                                underline="none"
+                                sx={{
+                                    cursor: "pointer",
+                                    color: "#929292",
+                                    fontFamily: "Nunito, sans-serif",
+                                    fontSize: "18px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "12px", // 60%
+                                    letterSpacing: "0.5px",
+                                }}
+                                
+                            >
+                               {CardData.Design_type}
+                            </Link>
+
+                        </Breadcrumbs>
+                        
+                    </Box>
                     <Stack spacing={3} sx={{ alignItems: "left", mt: 2 }}>
 
                         <Typography
@@ -113,7 +180,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                 color: '#3D3D3D',
                                 fontFamily: "'Nunito', sans-serif !important",
                                 // fontFamily: "Segoe UI, sans-serif",
-                                fontSize: '54px',
+                                fontSize: '52px',
                                 fontStyle: 'normal',
                                 fontWeight: 700,
                                 lineHeight: '28px',
@@ -129,10 +196,10 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                 color: '#3D3D3D',
                                 fontFamily: "'Nunito', sans-serif !important",
                                 // fontFamily: "Segoe UI, sans-serif",
-                                fontSize: '20px !important',
+                                fontSize: '18px !important',
                                 fontStyle: 'normal',
                                 fontWeight: 600,
-                                lineHeight: '28px', // 120%
+                                lineHeight: '25px', // 120%
                                 letterSpacing: '0.1px',
                                 textAlign: "left",
                             }}
@@ -161,7 +228,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                     </Button>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center", }}>
-                    <Box sx={{ maxWidth: "1000px", margin: "auto" }}>
+                    <Box sx={{ maxWidth: {xs: "350px", sm: "500px", lg:"1000px"}, margin: "auto" }}>
                         {/* Main Image */}
                         <Box
                             sx={{
@@ -378,16 +445,17 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                                     display: "flex",
                                                     alignItems: "center",
                                                     gap: 0.5,
-                                                    backgroundColor: "rgba(0,0,0,0.5)",
+                                                    // backgroundColor: "rgba(0,0,0,0.5)",
                                                     color: "#fff",
                                                     borderRadius: "20px",
                                                     px: 1,
                                                     py: 0.2,
-                                                    fontSize: "14px",
+                                                    fontSize: "15px !important",
+                                                    fontWeight: 700
                                                 }}
                                             >
-                                                <PhotoLibraryIcon sx={{ fontSize: "18px" }} />
-                                                More ({item.moreCount})
+                                                {/* <PhotoLibraryIcon sx={{ fontSize: "18px" }} /> */}
+                                                {item.Design_type}
                                             </Box>
                                         )}
                                     </Box>
