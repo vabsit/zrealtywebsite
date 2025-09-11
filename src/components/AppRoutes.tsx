@@ -6,7 +6,7 @@ import EmployeeList from "./people/employee/EmployeeList";
 import Footer from "./navbar/Footer";
 import Layout from "./dashboard/Layouts";
 import OrganisationSettings from "./masters/orgSettings";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../store/store";
 import Header from "./navbar/Header";
 import LandingScreen from "./LandingScreen/LandingScreen";
@@ -20,10 +20,14 @@ import HomeRemodeling from "./UseCases/HomeRemodeling";
 import IndianPartner from "./Business/IndianPartner";
 import Affiliate from "./Business/Affiliate";
 import Library from "./Library/Library";
+import Tutorials from "./Tutorial/Tutorials";
 
 const AppRoutes = () => {
   const { userData, isAuthenticated } = useAppSelector((state) => state.authdata);
   const navigate = useNavigate();
+  const [html, setHtml] = useState("");
+  const [Footer, setFooter] = useState("");
+  const [zlendoHeader, setzlendoHeader] = useState("");
 
   //  useEffect(() => {
   //      if(!isAuthenticated){
@@ -31,11 +35,124 @@ const AppRoutes = () => {
   //      }
   //   },[isAuthenticated])
 
+  useEffect(() => {
+    fetch("/header.html") // or your shared server URL
+      .then((res) => res.text())
+      .then((data) => {
+        setzlendoHeader(data);
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, "text/html");
+
+        // Inject CSS (avoid duplicates)
+        doc.querySelectorAll("link[rel='stylesheet']").forEach((link: any) => {
+          if (!document.querySelector(`link[href="${link.href}"]`)) {
+            const newLink = document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = link.href;
+            document.head.appendChild(newLink);
+          }
+        });
+
+        // Inject scripts (avoid duplicates)
+        doc.querySelectorAll("script").forEach((script) => {
+          if (script.src && document.querySelector(`script[src="${script.src}"]`)) {
+            return; // skip if already added
+          }
+
+          const newScript = document.createElement("script");
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/R_header.html") // or your shared server URL
+      .then((res) => res.text())
+      .then((data) => {
+        setHtml(data);
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, "text/html");
+
+        // Inject CSS (avoid duplicates)
+        doc.querySelectorAll("link[rel='stylesheet']").forEach((link: any) => {
+          if (!document.querySelector(`link[href="${link.href}"]`)) {
+            const newLink = document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = link.href;
+            document.head.appendChild(newLink);
+          }
+        });
+
+        // Inject scripts (avoid duplicates)
+        doc.querySelectorAll("script").forEach((script) => {
+          if (script.src && document.querySelector(`script[src="${script.src}"]`)) {
+            return; // skip if already added
+          }
+
+          const newScript = document.createElement("script");
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/R_footer.html") // or your shared server URL
+      .then((res) => res.text())
+      .then((data) => {
+        setFooter(data);
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, "text/html");
+
+        // Inject CSS (avoid duplicates)
+        doc.querySelectorAll("link[rel='stylesheet']").forEach((link: any) => {
+          if (!document.querySelector(`link[href="${link.href}"]`)) {
+            const newLink = document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = link.href;
+            document.head.appendChild(newLink);
+          }
+        });
+
+        // Inject scripts (avoid duplicates)
+        doc.querySelectorAll("script").forEach((script) => {
+          if (script.src && document.querySelector(`script[src="${script.src}"]`)) {
+            return; // skip if already added
+          }
+
+          const newScript = document.createElement("script");
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+      });
+  }, []);
+
   return (
     <>
       {/* <Box sx={{ backgroundColor: "#fff", minHeight: "100vh", pl: 4, pr: 4, }}> */}
       <Box sx={{ backgroundColor: "#fff", minHeight: "100vh", }}>
-        <Header />
+        {/* <Header /> */}
+        {/* <div dangerouslySetInnerHTML={{ __html: zlendoHeader }} /> */}
+
+        <Box sx={{ backgroundColor: "#dbece8" }}>
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </Box>
 
         <Box
           className="scrollable-section"
@@ -50,7 +167,7 @@ const AppRoutes = () => {
               color: (theme) => theme.palette.text.primary,
               backgroundColor: "#fff", // force paper bg to be white
               minHeight: "calc(100vh - 64px)", // Adjust if header/footer heights vary
-              mt: 3
+              // mt: 3
             }}
           >
             <Routes>
@@ -69,6 +186,7 @@ const AppRoutes = () => {
               <Route path="/affiliate" element={<Affiliate />} />
 
               <Route path="/library" element={<Library />} />
+              <Route path="/tutorials" element={<Tutorials />} />
 
               <Route path="/employee" element={<EmployeeList />} />
               <Route path="/dashboard" element={<Layout />} />
@@ -77,7 +195,9 @@ const AppRoutes = () => {
           </Box>
         </Box>
 
-        <Footer />
+        {/* <Footer /> */}
+        <div dangerouslySetInnerHTML={{ __html: Footer }} />
+
       </Box>
 
     </>

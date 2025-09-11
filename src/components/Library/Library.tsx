@@ -4,6 +4,7 @@ import {
     AccordionDetails,
     AccordionSummary,
     Box, Button, Divider, Drawer, Grid, IconButton, InputAdornment, Pagination, Stack, TextField, Typography,
+    useMediaQuery,useTheme
 } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TwoColumnLayout from "../../common/Layouts/TwoColumnLayout";
@@ -51,12 +52,14 @@ const StyledChip = styled(Chip, {
 
 const Library: React.FC<any> = ({ onClose }) => {
 
+    const theme = useTheme();
     const [selectedChip, setSelectedChip] = useState("All Spaces");
     const [searchTerm, setSearchTerm] = useState("");
     const [ViewLibraryOpen, setViewLibraryOpen] = useState(false);
     const [ViewLibraryData, setViewLibraryData] = useState([]);
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState<string | false>(false);
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleChange =
         (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
@@ -138,7 +141,7 @@ const Library: React.FC<any> = ({ onClose }) => {
     return (
         <>
             {!ViewLibraryOpen ? (
-                <Stack spacing={6} sx={{ mb: 2 }}>
+                <Stack spacing={6} sx={{ mb: 2, mt:3 }} px={2}>
 
                     <TwoColumnLayout
                         leftGrid={6}
@@ -152,10 +155,11 @@ const Library: React.FC<any> = ({ onClose }) => {
                                         color: '#3D3D3D',
                                         fontFeatureSettings: "'liga' off, 'clig' off",
                                         fontFamily: "'Nunito', sans-serif !important",
-                                        fontSize: '48px !important',
+                                        fontSize: '44px !important',
                                         fontStyle: 'normal',
                                         fontWeight: "700 !important",
-                                        lineHeight: '66px',
+                                        lineHeight: '60px',
+                                        textAlign: isMobile ? "center" : "left"
                                     }}
                                     mb={4}
                                     mt={2}
@@ -167,11 +171,12 @@ const Library: React.FC<any> = ({ onClose }) => {
                                     sx={{
                                         color: '#3D3D3D',
                                         fontFamily: "'Nunito', sans-serif !important",
-                                        fontSize: '20px !important',
+                                        fontSize: '18px !important',
                                         fontStyle: 'normal',
                                         fontWeight: "500 !important",
                                         lineHeight: '24px', // 120%
                                         letterSpacing: '0.1px', // You can’t use CSS vars like `var(...)` here directly
+                                        textAlign: isMobile ? "center" : "left"
                                     }}
                                 >
                                     Access free design templates for every room — from bedrooms to kitchens and beyond.
@@ -263,21 +268,21 @@ const Library: React.FC<any> = ({ onClose }) => {
                         </Box>
 
                         <Box>
-                            <IconButton sx={{ border: "2px solid #4CB79E", borderRadius: 2 }} onClick={toggleDrawer(true)}>
+                            {/* <IconButton sx={{ border: "2px solid #4CB79E", borderRadius: 2 }} onClick={toggleDrawer(true)}>
                                 <FilterListIcon sx={{ color: "#29B0A1", fontSize: 35, fontWeight: 600 }} />
-                            </IconButton>
+                            </IconButton> */}
                         </Box>
 
                     </Box>
 
-                    <Box px={6}>
+                    <Box px={{xs: 0, md: 3}}>
                         {/* Cards */}
                         <CustomProjectCard data={filteredProjects} itemsPerPage={8} onClick={(card) => { console.log("Selected card:", card); handleOpen(card) }} />
                     </Box>
 
                 </Stack>
             ) : (
-                <Stack spacing={6} sx={{ mb: 2 }} px={10}>
+                <Stack spacing={6} sx={{ mb: 2, mt:3 }} px={{xs: 2, sm: 2, lg:10}}>
                     <LibraryImageViewer data={ViewLibraryData} onClose={closeBasicDetails} />
                 </Stack>
             )}
@@ -362,7 +367,7 @@ const Library: React.FC<any> = ({ onClose }) => {
                 </Accordion>
 
 
-                <Box sx={{display:"flex", position:"absolute", bottom:0, p: 2, }} width={"90%"}>
+                <Box sx={{ display: "flex", position: "absolute", bottom: 0, p: 2, }} width={"90%"}>
                     <Button
                         fullWidth
                         sx={{

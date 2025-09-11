@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zlendo - Complete Header</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <style>
+      :root {
+        --orange: #ff6b00;
+        --orange-light: #fff0e6;
+      }
+
+      .text-orange {
+        color: var(--orange) !important;
+      }
+
+      .btn-outline-orange {
+        color: var(--orange) !important;
+        border-color: var(--orange) !important;
+      }
+
+      .btn-outline-orange:hover {
+        background-color: var(--orange) !important;
+        color: white;
+      }
+
+      .btn-orange {
+        background-color: var(--orange) !important;
+        color: white;
+      }
+
+      .btn-orange:hover {
+        background-color: #e55d00 !important;
+        color: white;
+      }
+
+      .web-header {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Desktop Mega Menu Styles */
+      .mega-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .prd-mmenu .dropdown-menu {
+        padding: 0;
+      }
+
+      .tab-card {
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 1px solid transparent;
+      }
+
+      .tab-card.active,
+      .tab-card:hover {
+        border-color: var(--orange);
+        background-color: var(--orange-light);
+      }
+      .dropdown{
+        white-space: nowrap;
+      }
+
+      .app-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .mega-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        color: #495057;
+        margin-bottom: 0.25rem;
+      }
+
+      .mega-tabs .nav-link.active {
+        background-color: var(--orange-light);
+        color: var(--orange);
+        font-weight: 600;
+      }
+
+      .prod-hov-fx {
+        transition: all 0.2s;
+        border-radius: 6px;
+      }
+
+      .prod-hov-fx:hover {
+        background-color: #f8f9fa;
+        text-decoration: none;
+      }
+
+      /* Mobile Menu Styles */
+      .mob-head-bar {
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+        width: 100%;
+      }
+
+      .menu-toggle-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #333;
+        z-index: 1040;
+      }
+
+      #zMobileMenu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        max-width: 85%;
+        height: 100%;
+        background: white;
+        z-index: 1030;
+        overflow-y: auto;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+      }
+
+      #zMobileMenu.show {
+        right: 0;
+      }
+
+      .menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 1rem;
+      }
+
+      #zMobileMenu ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      #zMobileMenu > ul > li {
+        margin-bottom: 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      #zMobileMenu a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        color: #333;
+        text-decoration: none;
+      }
+
+      #zMobileMenu a:not([href]) {
+        cursor: pointer;
+      }
+
+      .mobile-submenu,
+      .nested-submenu,
+      .inner-submenu {
+        display: none;
+        padding-left: 15px;
+        margin-top: 0.5rem;
+      }
+
+      .mobile-submenu.active,
+      .nested-submenu.active,
+      .inner-submenu.active {
+        display: block;
+      }
+
+      .toggle-chevron {
+        transition: transform 0.3s;
+      }
+
+      .toggle-chevron.rotated {
+        transform: rotate(90deg);
+      }
+
+      /* Custom layout for left logo, left menu, right contact */
+      .custom-navbar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 75px;
+      }
+
+      .navbar-brand {
+        margin-right: 2rem;
+      }
+
+      .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .navbar-nav .nav-item {
+        margin-right: 1.5rem;
+        position: static;
+      }
+
+      .nav-contact-btn {
+        margin-left: auto;
+      }
+
+      /* Desktop dropdown styles */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropbtn {
+        background-color: transparent;
+        color: #333;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 4px;
+        padding: 10px 0;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .grouped-dropdown {
+        display: flex;
+        width: 500px;
+        padding: 20px !important;
+      }
+
+      .dropdown-group {
+        flex: 1;
+        padding: 0 10px;
+      }
+
+      .group-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #eee;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 1199.98px) {
+        .navbar-nav .nav-item {
+          margin-right: 1rem;
+        }
+
+        .tab-card {
+          padding: 0.75rem;
+        }
+
+        .tab-card h6 {
+          font-size: 0.9rem;
+        }
+
+        .tab-card p {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Show mobile menu on tablets and mobiles */
+      @media (max-width: 991.98px) {
+        .desktop-header {
+          display: none !important;
+        }
+
+        .mob-head-bar {
+          display: flex !important;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .desktop-header {
+          display: block !important;
+        }
+
+        .mob-head-bar,
+        #zMobileMenu {
+          display: none !important;
+        }
+
+        .navbar-nav .nav-item.position-static:hover .dropdown-menu {
+          display: block;
+        }
+
+        .navbar-nav .nav-item.position-static .dropdown-menu {
+          margin-top: 0;
+        }
+      }
+
+      /* Demo content styles */
+      .hero-section {
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+      }
+
+      .feature-box {
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        height: 100%;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .roundness-2 {
+        border-radius: 8px;
+      }
+
+      .object-fit-cover {
+        object-fit: cover;
+      }
+
+      /* Backdrop for mobile menu */
+      .menu-backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1025;
+      }
+
+      .menu-backdrop.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Desktop Header - Hidden on tablets and mobiles -->
+    <div class="desktop-header d-none d-lg-block" style="position: unset">
+      <div style="padding-right: 20px; padding-left: 50px">
+        <div
+          class="custom-navbar"
+          style="display: flex; justify-content: stretch"
+        >
+          <!-- Logo on the left -->
+          <a class="navbar-brand" href="/zlendo_realty/index.html">
+            <img
+              loading="lazy"
+              src="/assets/images/logo_Zrealty.png"
+              alt="Zlendo Logo"
+              class="img-fluid"
+              style="max-height: 40px"
+            />
+          </a>
+          <div class="navbar-nav" style="padding-left: 200px; flex: 1">
+            <nav class="nav-links">
+              <div class="dropdown">
+                <button class="dropbtn">Products</button>
+                <div class="dropdown-content">
+                  <a
+                    href="/zlendo_realty/components/Products/2dto3dConvertor.html"
+                    >2D to 3D Converter</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Products/SmartRoomStyler.html"
+                    >Smart Room Styler</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Products/SmartCostEstimator.html"
+                    >Smart Cost Estimator</a
+                  >
+                  <a href="/zlendo_realty/components/Products/VasthuLayout.html"
+                    >Vastu Layout Optimizer</a
+                  >
+                  <a href="/zlendo_realty/components/Products/3dExport.html"
+                    >3D Export Toolkit</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Products/ZlendoRealtyApiSuite.html"
+                    >Zlendo API Suite</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Products/ImmersiveDesign.html"
+                    >Immersive Design Preview</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Products/AiRoomInspiration.html"
+                    >AI Room Inspiration</a
+                  >
+                  <a href="/zlendo_realty/components/Products/VRStudio.html"
+                    >Zlendo VR Studio</a
+                  >
+                </div>
+              </div>
+
+              <div class="dropdown use-cases">
+                <button class="dropbtn">Use Cases</button>
+                <div class="dropdown-content grouped-dropdown">
+                  <div class="dropdown-group">
+                    <div class="group-title">For Property Owners</div>
+                    <a href="/zlendo_realty/components/UseCases/HomeDesign.html"
+                      >Home Design</a
+                    >
+                    <a
+                      href="/zlendo_realty/components/UseCases/HouseReModeling.html"
+                      >Home Remodeling</a
+                    >
+                    <a href="#">Interior Design</a>
+                    <a href="#">Vastu-Optimized Spaces</a>
+                    <a href="#">NRI & Remote Planning</a>
+                  </div>
+                  <div class="dropdown-group">
+                    <div class="group-title">For Professionals</div>
+                    <a
+                      href="/zlendo_realty/components/UseCases/CommercialSpaces.html"
+                      >Commercial Spaces</a
+                    >
+                    <a href="#">Collaborate with Designers</a>
+                    <a href="#">For Real Estate Brokers</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dropdown">
+                <button class="dropbtn">Resources</button>
+                <div class="dropdown-content">
+                  <a href="/zlendo_realty/ResourceCommingSoon.html">Library</a>
+                  <a href="/zlendo_realty/ResourceCommingSoon.html">Blogs</a>
+                  <a href="/zlendo_realty/ResourceCommingSoon.html"
+                    >Help Centers</a
+                  >
+                  <a href="/zlendo_realty/ResourceCommingSoon.html"
+                    >Realty App</a
+                  >
+                </div>
+              </div>
+
+              <a
+                href="/zlendo_realty/PricingCommingSoon.html"
+                class="nav-item pricing"
+                >Pricing</a
+              >
+
+              <div class="dropdown">
+                <button class="dropbtn">Business</button>
+                <div class="dropdown-content">
+                  <a href="/zlendo_realty/components/Business/Affiliate.html"
+                    >Affiliate</a
+                  >
+                  <a
+                    href="/zlendo_realty/components/Business/IndianPartner.html"
+                    >Indian Partner</a
+                  >
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Header - Shown on tablets and mobiles -->
+    <div
+      class="mob-head-bar d-flex justify-content-between align-items-center p-3"
+    >
+      <a href="/zlendo_realty/index.html" class="d-inline-block">
+        <img
+          loading="lazy"
+          src="/assets/images/logo_Zrealty.png"
+          style="height: 40px"
+          alt="Zlendo Logo"
+          class="img-fluid"
+        />
+      </a>
+      <button class="menu-toggle-btn" onclick="zToggleMenu()">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+
+    <!-- Menu Backdrop -->
+    <div class="menu-backdrop" id="menuBackdrop" onclick="zToggleMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div id="zMobileMenu">
+      <div class="menu-header">
+        <a href="/zlendo_realty/index.html" class="d-inline-block">
+          <img
+            loading="lazy"
+            src="/assets/images/logo_Zrealty.png"
+            style="height: 40px"
+            alt="Zlendo Logo"
+            class="img-fluid"
+          />
+        </a>
+        <button class="menu-toggle-btn" onclick="zToggleMenu()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <ul>
+        <!-- Products -->
+        <li>
+          <a onclick="ztoggleSubmenu(this)"
+            >Products <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li>
+              <a href="/zlendo_realty/components/Products/2dto3dConvertor.html"
+                >2D to 3D Converter</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Products/SmartRoomStyler.html"
+                >Smart Room Styler</a
+              >
+            </li>
+            <li>
+              <a
+                href="/zlendo_realty/components/Products/SmartCostEstimator.html"
+                >Smart Cost Estimator</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Products/VasthuLayout.html"
+                >Vastu Layout Optimizer</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Products/3dExport.html"
+                >3D Export Toolkit</a
+              >
+            </li>
+            <li>
+              <a
+                href="/zlendo_realty/components/Products/ZlendoRealtyApiSuite.html"
+                >Zlendo API Suite</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Products/ImmersiveDesign.html"
+                >Immersive Design Preview</a
+              >
+            </li>
+            <li>
+              <a
+                href="/zlendo_realty/components/Products/AiRoomInspiration.html"
+                >AI Room Inspiration</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Products/VRStudio.html"
+                >Zlendo VR Studio</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <!-- Use Cases -->
+        <li>
+          <a onclick="ztoggleSubmenu(this)"
+            >Use Cases <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <!-- For Property Owners -->
+            <li>
+              <a onclick="ztoggleInnerAccordion(this)"
+                >For Property Owners
+                <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="inner-submenu">
+                <li>
+                  <a href="/zlendo_realty/components/UseCases/HomeDesign.html"
+                    >Home Design</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/zlendo_realty/components/UseCases/HouseReModeling.html"
+                    >Home Remodeling</a
+                  >
+                </li>
+                <li><a href="#">Interior Design</a></li>
+                <li><a href="#">Vastu-Optimized Spaces</a></li>
+                <li><a href="#">NRI & Remote Planning</a></li>
+              </ul>
+            </li>
+
+            <!-- For Professionals -->
+            <li>
+              <a onclick="ztoggleInnerAccordion(this)"
+                >For Professionals
+                <i class="bi bi-chevron-right toggle-chevron"></i
+              ></a>
+              <ul class="inner-submenu">
+                <li>
+                  <a
+                    href="/zlendo_realty/components/UseCases/CommercialSpaces.html"
+                    >Commercial Spaces</a
+                  >
+                </li>
+                <li><a href="#">Collaborate with Designers</a></li>
+                <li><a href="#">For Real Estate Brokers</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Resources -->
+        <li>
+          <a onclick="ztoggleSubmenu(this)"
+            >Resources <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li>
+              <a href="/zlendo_realty/ResourceCommingSoon.html">Library</a>
+            </li>
+            <li><a href="/zlendo_realty/ResourceCommingSoon.html">Blogs</a></li>
+            <li>
+              <a href="/zlendo_realty/ResourceCommingSoon.html">Help Centers</a>
+            </li>
+            <li>
+              <a href="/zlendo_realty/ResourceCommingSoon.html">Realty App</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Pricing -->
+        <li>
+          <a href="/zlendo_realty/PricingCommingSoon.html">Pricing</a>
+        </li>
+
+        <!-- Business -->
+        <li>
+          <a onclick="ztoggleSubmenu(this)"
+            >Business <i class="bi bi-chevron-right toggle-chevron"></i
+          ></a>
+          <ul class="mobile-submenu">
+            <li>
+              <a href="/zlendo_realty/components/Business/Affiliate.html"
+                >Affiliate</a
+              >
+            </li>
+            <li>
+              <a href="/zlendo_realty/components/Business/IndianPartner.html"
+                >Indian Partner</a
+              >
+            </li>
+          </ul>
+        </li>
+        <!-- Explore Zlendo Products -->
+        <li>
+          <a href="/index.html">Explore Zlendo Products</a>
+        </li>
+        <!-- CTA -->
+        <li>
+          <a
+            href="/contact-us.php"
+            class="d-inline-block btn-orange btn-padding w-100 text-center text-white border rounded py-2 mt-2"
+            style="border-radius: 123px"
+            >Contact Us</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script>
+      // Function to toggle mobile menu
+      function zToggleMenu() {
+        const mobileMenu = document.getElementById("zMobileMenu");
+        const backdrop = document.getElementById("menuBackdrop");
+        mobileMenu.classList.toggle("show");
+        backdrop.classList.toggle("show");
+
+        // Prevent body scrolling when menu is open
+        document.body.style.overflow = mobileMenu.classList.contains("show")
+          ? "hidden"
+          : "";
+      }
+
+      // Function to toggle submenus in mobile view
+      function ztoggleSubmenu(element) {
+        const submenu = element.nextElementSibling;
+        const chevron = element.querySelector(".toggle-chevron");
+
+        if (submenu.style.display === "block") {
+          submenu.style.display = "none";
+          chevron.classList.remove("rotated");
+        } else {
+          submenu.style.display = "block";
+          chevron.classList.add("rotated");
+        }
+      }
+
+      // Function to toggle inner accordion menus
+      function ztoggleInnerAccordion(element) {
+        const innerSubmenu = element.nextElementSibling;
+        const chevron = element.querySelector(".toggle-chevron");
+
+        if (innerSubmenu.style.display === "block") {
+          innerSubmenu.style.display = "none";
+          chevron.classList.remove("rotated");
+        } else {
+          innerSubmenu.style.display = "block";
+          chevron.classList.add("rotated");
+        }
+      }
+
+      // Initialize tab functionality for product tabs
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabCards = document.querySelectorAll(".tab-card");
+
+        tabCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            // Remove active class from all tabs
+            tabCards.forEach((c) => c.classList.remove("active"));
+
+            // Add active class to clicked tab
+            this.classList.add("active");
+
+            // Show corresponding tab content
+            const target = this.getAttribute("data-bs-target");
+            const tabPanes = document.querySelectorAll(".tab-pane");
+
+            tabPanes.forEach((pane) => {
+              pane.classList.remove("show", "active");
+            });
+
+            if (target) {
+              document.querySelector(target).classList.add("show", "active");
+            }
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener("click", function (event) {
+          const mobileMenu = document.getElementById("zMobileMenu");
+          const menuToggle = document.querySelector(".menu-toggle-btn");
+
+          if (
+            mobileMenu.classList.contains("show") &&
+            !mobileMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
+          ) {
+            zToggleMenu();
+          }
+        });
+      });
+    </script>
+
+    <!-- Bootstrap JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
