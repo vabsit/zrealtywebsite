@@ -18,7 +18,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px !important;
+  /* padding: 18px 40px !important; */
   background-color: #ffffff;
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
 }
@@ -642,5 +642,19 @@ padding: 0 !important;
   }
 
 
+}
+
+#Realty_header {
+  width: 100%;
+  z-index: 999;
+  transition: top 0.3s;
+}
+
+.fixed-top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* important so it stretches */
+  background-color: #dbece8 !important;
 }
 

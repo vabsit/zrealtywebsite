@@ -22,3 +22,9 @@ declare module '*.html' {
   const content: string;
   export default content;
 }
+
+declare global {
+  interface Window {
+    initHeaderScripts?: () => void;
+  }
+}

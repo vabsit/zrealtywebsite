@@ -18,9 +18,9 @@ const StyledChip = styled(Chip, {
   padding: "17px 8px",
   border: `1px solid ${selected ? "transparent" : "#4CB79E"}`,
   background: selected ? "#21b9ad" : "transparent",
-  color: selected ? "#fff" : "#383838",
+  color: selected ? "#fff !important" : "#383838",
   "&:hover": {
-    background: selected ? "#269F91" : "rgba(33, 185, 173, 0.1)",
+    background: selected ? "#269F91 !important" : "rgba(33, 185, 173, 0.1) !important",
     borderColor: "#4CB79E",
   },
   "& .MuiChip-label": {
