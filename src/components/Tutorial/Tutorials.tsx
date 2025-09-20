@@ -37,13 +37,6 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
     const [ViewTutorialData, setViewTutorialData] = useState([]);
     const itemsPerPage = 8;
 
-    // useEffect(() => {
-    //     fetch("/R_header.html")
-    //         .then(res => res.text())
-    //         .then(setHtml);
-    // }, []);
-
-
     const videos = [
         {
             title: "Basic How to Draw floor plan | Basic",
@@ -159,7 +152,27 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
         setPage(value);
     };
 
-    const paginatedData = videos.slice(
+    const filteredVideos = useMemo(() => {
+            return videos
+                .filter(videos => {
+                    const matchesChip =
+                        selectedChip === "All" || videos.type === selectedChip;
+                    const matchesSearch =
+                        searchTerm.trim() === "" ||
+                        videos.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        videos.title.toLowerCase().includes(searchTerm.toLowerCase());
+                    return matchesChip && matchesSearch;
+                })
+                .map(videos => ({
+                    ...videos,
+                    CardClick: (data: any) => {
+                        // You can customize this function as needed
+                        console.log("Card clicked:", data);
+                    }
+                }));
+        }, [videos, selectedChip, searchTerm]);
+
+    const paginatedData = filteredVideos.slice(
         (page - 1) * itemsPerPage,
         page * itemsPerPage
     );

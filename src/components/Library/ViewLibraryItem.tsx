@@ -35,17 +35,6 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const navigate = useNavigate();
 
-    // const images = [
-    //     { src: HomeOwner, thumb: HomeModelingBanner },
-    //     { src: HomeModelingBanner, thumb: EasySteps },
-    //     { src: HouseModelSolution, thumb: HomeModelingBanner },
-    //     { src: RealEstate, thumb: RealEstate },
-    //     { src: Interior, thumb: EasySteps },
-    //     { src: EasySteps, thumb: RealEstate },
-    //     { src: EasySteps, thumb: RealEstate },
-    //     { src: EasySteps, thumb: RealEstate },
-    //     { src: EasySteps, thumb: RealEstate },
-    // ];
     const CardData = data?.data ? data?.data : []
     const images = CardData ? CardData.images : []
     console.log(images, "images");
@@ -290,23 +279,6 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                             </IconButton>
                         </Box>
 
-                        {/* Thumbnails */}
-                        {/* <ImageList cols={isMobile ? 4 : 6} sx={{ mt: 2 }} rowHeight={120}>
-                        {images.map((item, i) => (
-                        <ImageListItem key={i} onClick={() => setIndex(i)}>
-                            <img
-                            src={item.thumb}
-                            alt=""
-                            style={{
-                                border: i === index ? "3px solid #1976d2" : "2px solid transparent",
-                                cursor: "pointer",
-                                borderRadius: "10px"
-                            }}
-                            />
-                        </ImageListItem>
-                        ))}
-                    </ImageList> */}
-
                         <Box sx={{ position: "relative", mt: 2 }}>
                             {/* Left Scroll Button */}
                             {/* <IconButton
@@ -432,7 +404,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                             image={item.image}
                                             alt={item.userName}
                                             sx={{
-                                                height: 200,
+                                                height: 160,
                                                 objectFit: "cover",
                                             }}
                                         />
