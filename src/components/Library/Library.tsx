@@ -3,8 +3,8 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    Box, Button, Divider, Drawer, Grid, IconButton, InputAdornment, Pagination, Stack, TextField, Typography,
-    useMediaQuery,useTheme
+    Box, Button, Divider, Drawer, IconButton, InputAdornment, Stack, TextField, Typography,
+    useMediaQuery, useTheme
 } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TwoColumnLayout from "../../common/Layouts/TwoColumnLayout";
@@ -13,21 +13,13 @@ import LibraryBanner from '../../assets/Library/LibraryBanner.png';
 import SearchIcon from "@mui/icons-material/Search";
 import SendIcon from "@mui/icons-material/Send";
 import CustomChip from "../../common/CommonChip/CustomFilterChip";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import CustomProjectCard from "../../common/ProjectCard/ProjectImageCard";
-
-import HomeOwner from '../../assets/HouseModeling/houseOwner.png';
-import Interior from '../../assets/HouseModeling/InteriorDesigner.png';
-import RealEstate from '../../assets/HouseModeling/RealEstate.png';
-import HomeModelingBanner from '../../assets/HouseModeling/HomeModelingBanner.png';
-import HouseModelSolution from '../../assets/HouseModeling/HouseModelSolution.png';
-import EasySteps from '../../assets/HouseModeling/EasySteps.png';
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import LibraryImageViewer from "./ViewLibraryItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import { Chip } from "@mui/material";
+import DynamicScreenService from "../../store/master/services/DynamicScreenServices";
 
 
 const StyledChip = styled(Chip, {
@@ -59,6 +51,8 @@ const Library: React.FC<any> = ({ onClose }) => {
     const [ViewLibraryData, setViewLibraryData] = useState([]);
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState<string | false>(false);
+    const [projects, setProjects] = useState([]);
+
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleChange =
@@ -70,56 +64,96 @@ const Library: React.FC<any> = ({ onClose }) => {
         setOpen(state);
     };
 
-    const projects = [
-        {
-            Design_type: "Kitchen",
-            userName: "Loosiya",
-            image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800",
-            userAvatar: "https://randomuser.me/api/portraits/women/44.jpg",
-            views: "12K",
-            images: [
-                { src: HomeOwner, },
-                { src: HomeModelingBanner, },
-                { src: HouseModelSolution, },
-                { src: RealEstate, },
-                { src: Interior, },
-                { src: EasySteps, },
-                { src: EasySteps, },
-                { src: EasySteps, },
-                { src: EasySteps, },
-            ],
-            moreCount: 42,
-            description: "This modern, minimalist apartment in an urban setting combines the living area and kitchen into one large open space, creating a social and interactive environment. The bedrooms are separated for privacy. The design emphasizes functionality and simplicity, with a focus on creating a serene and uncluttered environment. The color scheme uses a combination of light and dark tones, with the living area and kitchen in a light beige or off-white color, and the bedrooms in a slightly darker shade. The use of light and dark contrasts, along with the careful selection of materials and colors, contributes to a sophisticated and inviting atmosphere."
-        },
-        { Design_type: "Bedroom", userName: "Loosiya", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800", userAvatar: "https://randomuser.me/api/portraits/women/44.jpg", views: "12K", moreCount: 42 },
-        { Design_type: "Living", userName: "Loosiya", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800", userAvatar: "https://randomuser.me/api/portraits/women/44.jpg", views: "12K", moreCount: 42 },
-        { Design_type: "Kitchen", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Bedroom", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Living Room", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Kitchen", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Bedroom", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Kitchen", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-        { Design_type: "Living Room", userName: "Loosiya", image: "...", userAvatar: "...", views: "12K", moreCount: 42 },
-    ];
+    // const projects = [
+    //     {
+    //         design_Type: "Kitchen",
+    //         userName: "Loosiya",
+    //         image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800",
+    //         profileUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+    //         views: "12K",
+    //         multipleImages: [
+    //             { src: HomeOwner, },
+    //             { src: HomeModelingBanner, },
+    //             { src: HouseModelSolution, },
+    //             { src: RealEstate, },
+    //             { src: Interior, },
+    //             { src: EasySteps, },
+    //             { src: EasySteps, },
+    //             { src: EasySteps, },
+    //             { src: EasySteps, },
+    //         ],
+    //         moreCount: 42,
+    //         description: "This modern, minimalist apartment in an urban setting combines the living area and kitchen into one large open space, creating a social and interactive environment. The bedrooms are separated for privacy. The design emphasizes functionality and simplicity, with a focus on creating a serene and uncluttered environment. The color scheme uses a combination of light and dark tones, with the living area and kitchen in a light beige or off-white color, and the bedrooms in a slightly darker shade. The use of light and dark contrasts, along with the careful selection of materials and colors, contributes to a sophisticated and inviting atmosphere."
+    //     },
+    //     { design_Type: "Bedroom", userName: "Loosiya", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800", profileUrl: "https://randomuser.me/api/portraits/women/44.jpg", views: "12K", moreCount: 42 },
+    //     { design_Type: "Living", userName: "Loosiya", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800", profileUrl: "https://randomuser.me/api/portraits/women/44.jpg", views: "12K", moreCount: 42 },
+    //     { design_Type: "Kitchen", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Bedroom", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Living Room", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Kitchen", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Bedroom", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Kitchen", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    //     { design_Type: "Living Room", userName: "Loosiya", image: "...", profileUrl: "...", views: "12K", moreCount: 42 },
+    // ];
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const res = await DynamicScreenService.getLibraryList();
+    //         console.log("res", res.data);
+    //         setProjects(res.data);
+    //     };
+    //     fetchData();
+    // }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await DynamicScreenService.getLibraryList();
+            // Map and normalize the data
+            const normalized = res.data.map((item: any) => {
+                let multipleImages: { src: string }[] = [];
+                if (typeof item.multipleImages === "string") {
+                    // Remove brackets and split by comma, then trim and remove quotes
+                    multipleImages = item.multipleImages
+                        .replace(/^\[|\]$/g, "")
+                        .split(",")
+                        .map((url: string) => url.trim().replace(/^"|"$/g, ""))
+                        .filter(Boolean)
+                        .map((url: string) => ({ src: url }));
+                } else if (Array.isArray(item.multipleImages)) {
+                    // Already in array format (old data)
+                    multipleImages = item.multipleImages;
+                }
+                return {
+                    ...item,
+                    multipleImages,
+                    moreCount: multipleImages.length - 1,
+                };
+            });
+            setProjects(normalized);
+            console.log(normalized, "normalized");
+            
+        };
+        fetchData();
+    }, []);
 
     const chipLabels = useMemo(() => {
-        const uniqueTypes = Array.from(new Set(projects.map(p => p.Design_type)));
+        const uniqueTypes = Array.from(new Set(projects.map((p: any) => p.design_Type)));
         return ["All Spaces", ...uniqueTypes];
     }, [projects]);
 
     // Filtered data based on chip + search
     const filteredProjects = useMemo(() => {
         return projects
-            .filter(project => {
+            .filter((project: any) => {
                 const matchesChip =
-                    selectedChip === "All Spaces" || project.Design_type === selectedChip;
+                    selectedChip === "All Spaces" || project.design_Type === selectedChip;
                 const matchesSearch =
                     searchTerm.trim() === "" ||
-                    project.Design_type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    project.design_Type.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     project.userName.toLowerCase().includes(searchTerm.toLowerCase());
                 return matchesChip && matchesSearch;
             })
-            .map(project => ({
+            .map((project: any) => ({
                 ...project,
                 CardClick: (data: any) => {
                     // You can customize this function as needed
@@ -141,7 +175,7 @@ const Library: React.FC<any> = ({ onClose }) => {
     return (
         <>
             {!ViewLibraryOpen ? (
-                <Stack spacing={6} sx={{ mb: 2, mt:3 }} px={2}>
+                <Stack spacing={6} sx={{ mb: 2, mt: 3 }} px={2}>
 
                     <TwoColumnLayout
                         leftGrid={6}
@@ -275,15 +309,15 @@ const Library: React.FC<any> = ({ onClose }) => {
 
                     </Box>
 
-                    <Box px={{xs: 0, md: 3}}>
+                    <Box px={{ xs: 0, md: 3 }}>
                         {/* Cards */}
                         <CustomProjectCard data={filteredProjects} itemsPerPage={8} onClick={(card) => { console.log("Selected card:", card); handleOpen(card) }} />
                     </Box>
 
                 </Stack>
             ) : (
-                <Stack spacing={6} sx={{ mb: 2, mt:3 }} px={{xs: 2, sm: 2, lg:10}}>
-                    <LibraryImageViewer data={ViewLibraryData} onClose={closeBasicDetails} />
+                <Stack spacing={6} sx={{ mb: 2, mt: 3 }} px={{ xs: 2, sm: 2, lg: 10 }}>
+                    <LibraryImageViewer data={ViewLibraryData} onClose={closeBasicDetails} FrequentData={projects} />
                 </Stack>
             )}
 

@@ -9,123 +9,134 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 import React from 'react';
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DynamicScreenService from "../../store/master/services/DynamicScreenServices";
 
 
 const Pricing: React.FC<any> = ({ onClose }) => {
 
     const [selected, setSelected] = useState("monthly");
     const [activeIndex, setActiveIndex] = useState<number | null>(2);
+    const [plans, setPlans] = useState<any>({});
 
 
-    const plans = {
-        month: [{
-            price: "₹299",
-            period: "/month",
-            title: "Intro",
-            popular: false,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹599",
-            period: "/month",
-            title: "Base",
-            popular: false,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹1999",
-            period: "/month",
-            title: "Pro",
-            popular: true,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹2999",
-            period: "/month",
-            title: "Enterprise",
-            popular: false,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        ],
+    // const plans = {
+    //     month: [{
+    //         price: "₹299",
+    //         period: "/month",
+    //         title: "Intro",
+    //         popular: false,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹599",
+    //         period: "/month",
+    //         title: "Base",
+    //         popular: false,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹1,999",
+    //         period: "/month",
+    //         title: "Pro",
+    //         popular: true,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹2,999",
+    //         period: "/month",
+    //         title: "Enterprise",
+    //         popular: false,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     ],
 
-        year: [{
-            price: "₹2999",
-            period: "/year",
-            title: "Intro",
-            popular: false,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹5999",
-            period: "/year",
-            title: "Base",
-            popular: false,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹19,999",
-            period: "/year",
-            title: "Pro",
-            popular: true,
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        {
-            price: "₹29,999",
-            period: "/year",
-            popular: false,
-            title: "Enterprise",
-            features: [
-                "All limited links",
-                "Own analytics platform",
-                "Chat support",
-                "Optimize hashtags",
-                "Unlimited users",
-            ],
-        },
-        ],
-    };
+    //     year: [{
+    //         price: "₹2,999",
+    //         period: "/year",
+    //         title: "Intro",
+    //         popular: false,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹5,999",
+    //         period: "/year",
+    //         title: "Base",
+    //         popular: false,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹19,999",
+    //         period: "/year",
+    //         title: "Pro",
+    //         popular: true,
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     {
+    //         price: "₹29,999",
+    //         period: "/year",
+    //         popular: false,
+    //         title: "Enterprise",
+    //         featureName: [
+    //             "All limited links",
+    //             "Own analytics platform",
+    //             "Chat support",
+    //             "Optimize hashtags",
+    //             "Unlimited users",
+    //         ],
+    //     },
+    //     ],
+    // };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await DynamicScreenService.getPricingList();
+            console.log("res", res.data);
+            setPlans(res.data);
+        };
+        fetchData();
+    }, []);
 
     const plansToDisplay = selected === "monthly" ? plans.month : plans.year;
 
@@ -263,7 +274,7 @@ const Pricing: React.FC<any> = ({ onClose }) => {
                         backgroundColor: "#fff",
                     }}
                 >
-                    {plansToDisplay.map((plan, index) => {
+                    {plansToDisplay?.map((plan:any, index:any) => {
                         const isActive = activeIndex === index;
 
                         return (
@@ -361,6 +372,13 @@ const Pricing: React.FC<any> = ({ onClose }) => {
                                     </Box>
                                 )}
 
+                                <Box sx={{ textAlign: "left", mt: 2, }}>
+                                    {/* Title */}
+                                    <Typography variant="h4" className="choose-price" sx={{ mt: 1, fontWeight: 600, color: '#3d3d3d', fontFamily: "'Nunito', sans-serif !important", }}>
+                                        {plan.title}
+                                    </Typography>
+                                </Box>
+
 
                                 {/* Price */}
                                 <Typography variant="h3" fontWeight={600} sx={{
@@ -379,15 +397,11 @@ const Pricing: React.FC<any> = ({ onClose }) => {
                                         }}
                                         className="choose-price"
                                     >
-                                        {plan.period}
+                                        /{plan.period}
                                     </Typography>
                                 </Typography>
 
                                 <Box sx={{ textAlign: "left", mt: 2, }}>
-                                    {/* Title */}
-                                    <Typography variant="h4" className="choose-price" sx={{ mt: 1, fontWeight: 600, color: '#3d3d3d', fontFamily: "'Nunito', sans-serif !important", }}>
-                                        {plan.title}
-                                    </Typography>
 
                                     {/* Description */}
                                     <Typography
@@ -395,13 +409,33 @@ const Pricing: React.FC<any> = ({ onClose }) => {
                                         className="choose-price"
                                         sx={{ mt: 1, mb: 2, color: 'gray', fontFamily: "'Nunito', sans-serif !important", }}
                                     >
-                                        For most businesses that want to optimize web queries
+                                        {plan.description}
                                     </Typography>
                                 </Box>
 
+                                {/* Button */}
+                                <Button
+                                    fullWidth
+                                    className="choose-btn"
+                                    sx={{
+                                        borderRadius: "30px",
+                                        py: 1,
+                                        bgcolor: "#e6f6f4",
+                                        color: "#30C9A1",
+                                        mb: 2,
+                                        fontWeight: 600,
+                                        "&:hover": {
+                                            // bgcolor: isActive ? "#f2f2f2" : "#fff",
+                                            // color: isActive ? "#fff" : "#30C9A1",
+                                        },
+                                    }}
+                                >
+                                    Choose plan
+                                </Button>
+
                                 {/* Features */}
                                 <Box sx={{ textAlign: "left", mb: 3 }}>
-                                    {plan.features.map((feature, i) => (
+                                    {plan.featureName?.map((feature:any, i:any) => (
                                         <Box
                                             key={i}
                                             sx={{ display: "flex", alignItems: "center", mb: 1, gap: 1 }}
@@ -424,23 +458,6 @@ const Pricing: React.FC<any> = ({ onClose }) => {
                                     ))}
                                 </Box>
 
-                                {/* Button */}
-                                <Button
-                                    fullWidth
-                                    className="choose-btn"
-                                    sx={{
-                                        borderRadius: "30px",
-                                        py: 1,
-                                        bgcolor: "#e6f6f4",
-                                        color: "#30C9A1",
-                                        fontWeight: 600,
-                                        "&:hover": {
-                                            bgcolor: isActive ? "#f2f2f2" : "#fff",
-                                        },
-                                    }}
-                                >
-                                    Choose plan
-                                </Button>
                             </Box>
                         );
                     })}

@@ -2,8 +2,9 @@
 import axios, { AxiosError , AxiosResponse } from 'axios';
 import { store } from '../../../store';
 import { logout } from '../../slices/authSlice';
+import { version } from './constant';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://216.48.182.24:4051';
 interface ErrorResponse {
     message?: string;
     error?: string;
@@ -11,11 +12,12 @@ interface ErrorResponse {
     // Add any other possible error response fields your API might return
   }
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: `${API_BASE_URL}${version}`,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     'X-Frame-Option': 'none',
+    'X-EMAIL-ADDRESS': 'test@test.com',
   },
 });
 

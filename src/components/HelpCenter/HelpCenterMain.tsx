@@ -18,12 +18,14 @@ import ImageOutlinedIcon from "../../assets/helpCenter/famicons_image-outline.pn
 import HouseOutlinedIcon from "../../assets/helpCenter/cbi_wall-fuzo-h.png";
 import HouseIcon from "../../assets/helpCenter/Vector.png";
 import ViewHelpCenter from "./ViewHelpCenter";
+import ChatWidget from "./HelpCenterChatBot";
 
 
 const HelpCenter: React.FC<any> = ({ onClose }) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [ViewTutorialOpen, setViewTutorialOpen] = useState(false);
+    const [ViewSearchOpen, setViewSearchOpen] = useState(false);
     const [ViewTutorialData, setViewTutorialData] = useState([]);
 
     const categories = [
@@ -41,7 +43,15 @@ const HelpCenter: React.FC<any> = ({ onClose }) => {
     const closeBasicDetails = () => {
         setViewTutorialOpen(false);
         setViewTutorialData([]);
+        setViewSearchOpen(false);
+        setSearchTerm("");
     };
+
+    const handleSearch = (term: string) => {
+        console.log("Search initiated for:", term);
+        setViewSearchOpen(true);
+        setViewTutorialOpen(true);
+    }
 
     useEffect(() => {
         if (ViewTutorialOpen) {
@@ -66,7 +76,7 @@ const HelpCenter: React.FC<any> = ({ onClose }) => {
                     >
                         <Stack
                             spacing={3}
-                            sx={{ alignItems: "center", mt: { xs: 2, sm: 7, md: 7, lg: 7 } }}
+                            sx={{ alignItems: "center", mt: { xs: 9, sm: 7, md: 7, lg: 7 } }}
                         >
                             <Typography
                                 variant="h2"
@@ -99,6 +109,12 @@ const HelpCenter: React.FC<any> = ({ onClose }) => {
                                 variant="outlined"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        console.log("Search triggered:", searchTerm);
+                                        handleSearch(searchTerm);
+                                    }
+                                }}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -140,7 +156,7 @@ const HelpCenter: React.FC<any> = ({ onClose }) => {
                         >
                             {categories.map((cat, index) => (
                                 <Card
-                                onClick={() => handleOpen(cat)}
+                                    onClick={() => handleOpen(cat)}
                                     key={index}
                                     sx={{
                                         width: 200,
@@ -178,9 +194,11 @@ const HelpCenter: React.FC<any> = ({ onClose }) => {
                 </Stack>
             ) : (
                 <Stack spacing={6} >
-                    <ViewHelpCenter data={ViewTutorialData} onClose={closeBasicDetails} />
+                    <ViewHelpCenter data={ViewTutorialData} onClose={closeBasicDetails} search={ViewSearchOpen} setSearch={setViewSearchOpen} searchData={searchTerm} />
                 </Stack>
             )}
+
+            <ChatWidget />
         </Box>
     );
 }

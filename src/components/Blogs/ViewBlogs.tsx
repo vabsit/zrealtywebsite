@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, List, ListItem, ListItemButton, ListItemText, ListItemAvatar, Avatar, Breadcrumbs, Link, Divider, Theme, useMediaQuery } from "@mui/material";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import { Box, Typography, Breadcrumbs, Link, Theme, useMediaQuery } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 import blogBanner from '../../assets/Blogs/image 2.png';
+import { Image_Blob_Key } from "../../store/master/services/config/constant";
 
 
 interface ViewTutorialProps {
@@ -31,6 +31,10 @@ const ViewBlogs: React.FC<ViewTutorialProps> = ({
     };
 
     console.log(data, "data");
+
+    const FormatedImageURL = (URL: string) => {
+        return `${URL}?${Image_Blob_Key}`;
+    };
 
     return (
         <Box>
@@ -95,7 +99,9 @@ const ViewBlogs: React.FC<ViewTutorialProps> = ({
                 </Breadcrumbs>
                 <Box
                     component="img"
-                    src={blogBanner}
+                    // src={blogBanner}
+                    src={FormatedImageURL(data.image)}
+                    loading="lazy"
                     alt="Blog Banner"
                     sx={{
                         height: { xs: "100vh", sm: "80vh", md: "80vh", lg: "60vh" },
@@ -128,13 +134,13 @@ const ViewBlogs: React.FC<ViewTutorialProps> = ({
                             fontSize: '18px !important',
                             fontStyle: 'normal',
                             fontWeight: 500,
-                            lineHeight: '25px', 
+                            lineHeight: '25px',
                             letterSpacing: '0.1px',
                             textAlign: "left",
                             mt: 3,
                         }}
                         width="95%"
-                        component="div"   
+                        component="div"
                         dangerouslySetInnerHTML={{ __html: data.blogDescription }}
                     />
 

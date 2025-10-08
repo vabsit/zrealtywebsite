@@ -1,10 +1,6 @@
 
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Avatar,
-    Box, Button, Card, CardContent, CardMedia, Divider, IconButton, InputAdornment, Link, Pagination, Stack, TextField, Typography,
+    Box, Button, Card, CardContent, CardMedia, Divider, IconButton, InputAdornment, Pagination, Stack, TextField, Typography,
 } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import React from 'react';
@@ -16,16 +12,12 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Promotion from '../../assets/Affiliate/Promotion.png';
-import Team from '../../assets/Affiliate/Team.png';
-import HomeOwner from '../../assets/HouseModeling/houseOwner.png';
-import Interior from '../../assets/HouseModeling/InteriorDesigner.png';
-import RealEstate from '../../assets/HouseModeling/RealEstate.png';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ViewTutorial from "./ViewTutorial";
 import CustomChip from "../../common/CommonChip/CustomFilterChip";
-import Header from "../Common_Header_Footer/R_header.html";
+import DynamicScreenService from "../../store/master/services/DynamicScreenServices";
+import { Image_Blob_Key } from "../../store/master/services/config/constant";
 
 
 const Tutorials: React.FC<any> = ({ onClose }) => {
@@ -35,103 +27,133 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
     const [page, setPage] = useState(1);
     const [ViewTutorialOpen, setViewTutorialOpen] = useState(false);
     const [ViewTutorialData, setViewTutorialData] = useState([]);
+    const [videos, setVideos] = useState([]);
     const itemsPerPage = 8;
 
-    const videos = [
-        {
-            title: "Basic How to Draw floor plan | Basic",
-            image: RealEstate,
-            duration: "7 min",
-            type: "Beginner Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Basic How to Draw floor plan | Basic",
-            image: Interior,
-            duration: "7 min",
-            type: "Construction Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Digital Painting for Beginners",
-            image: Promotion,
-            duration: "7 min",
-            type: "Tutorial Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: HomeOwner,
-            duration: "7 min",
-            type: "Beginner Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: Team,
-            duration: "7 min",
-            type: "Construction Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: Interior,
-            duration: "7 min",
-            type: "Tutorial Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: RealEstate,
-            duration: "7 min",
-            type: "Beginner Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: Team,
-            duration: "7 min",
-            type: "Construction Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: Interior,
-            duration: "7 min",
-            type: "Tutorial Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-        {
-            title: "Character Design Fundamentals",
-            image: RealEstate,
-            duration: "7 min",
-            type: "Beginner Guide",
-            views: "12 K",
-            likes: "12 K",
-            comments: "750",
-        },
-    ];
+    // const videos = [
+    //     {
+    //         tutorial_Id: 1,
+    //         title: "Basic How to Draw floor plan | Basic",
+    //         image: RealEstate,
+    //         duration: "7 min",
+    //         type: "Beginner Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/jf2dUCBscA0?si=kqmQJZ4jbb5lvWxj",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 2,
+    //         title: "Basic How to Draw floor plan | Basic",
+    //         image: Interior,
+    //         duration: "7 min",
+    //         type: "Construction Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/Df5igmB9MAA?si=FCo5mgC7vExj5Urt",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 3,
+    //         title: "Digital Painting for Beginners",
+    //         image: Promotion,
+    //         duration: "7 min",
+    //         type: "Tutorial Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/1k2eznTgnXY?si=2iZnOgmWfqvcF1i6",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 4,
+    //         title: "Character Design Fundamentals",
+    //         image: HomeOwner,
+    //         duration: "7 min",
+    //         type: "Beginner Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/jf2dUCBscA0?si=kqmQJZ4jbb5lvWxj",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 5,
+    //         title: "Character Design Fundamentals",
+    //         image: Team,
+    //         duration: "7 min",
+    //         type: "Construction Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/1k2eznTgnXY?si=2iZnOgmWfqvcF1i6",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 6,
+    //         title: "Character Design Fundamentals",
+    //         image: Interior,
+    //         duration: "7 min",
+    //         type: "Tutorial Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/Df5igmB9MAA?si=FCo5mgC7vExj5Urt",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 7,
+    //         title: "Character Design Fundamentals",
+    //         image: RealEstate,
+    //         duration: "7 min",
+    //         type: "Beginner Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/jf2dUCBscA0?si=kqmQJZ4jbb5lvWxj",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 8,
+    //         title: "Character Design Fundamentals",
+    //         image: Team,
+    //         duration: "7 min",
+    //         type: "Construction Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/1k2eznTgnXY?si=2iZnOgmWfqvcF1i6",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 9,
+    //         title: "Character Design Fundamentals",
+    //         image: Interior,
+    //         duration: "7 min",
+    //         type: "Tutorial Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/Df5igmB9MAA?si=FCo5mgC7vExj5Urt",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    //     {
+    //         tutorial_Id: 10,
+    //         title: "Character Design Fundamentals",
+    //         image: RealEstate,
+    //         duration: "7 min",
+    //         type: "Beginner Guide",
+    //         tutorialUrl: "https://www.youtube.com/embed/jf2dUCBscA0?si=kqmQJZ4jbb5lvWxj",
+    //         views: "12 K",
+    //         likes: "12 K",
+    //         comments: "750",
+    //     },
+    // ];
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await DynamicScreenService.getTutorialList();
+            console.log("res", res.data);
+            setVideos(res.data);
+        };
+        fetchData();
+    }, []);
 
     const chipLabels = useMemo(() => {
-        const uniqueTypes = Array.from(new Set(videos.map(p => p.type)));
+        const uniqueTypes = Array.from(new Set(videos.map((p:any) => p.type)));
         return ["All", ...uniqueTypes];
     }, [videos]);
 
@@ -154,17 +176,17 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
 
     const filteredVideos = useMemo(() => {
             return videos
-                .filter(videos => {
+                .filter((video:any) => {
                     const matchesChip =
-                        selectedChip === "All" || videos.type === selectedChip;
+                        selectedChip === "All" || video.type === selectedChip;
                     const matchesSearch =
                         searchTerm.trim() === "" ||
-                        videos.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        videos.title.toLowerCase().includes(searchTerm.toLowerCase());
+                        video.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        video.title.toLowerCase().includes(searchTerm.toLowerCase());
                     return matchesChip && matchesSearch;
                 })
-                .map(videos => ({
-                    ...videos,
+                .map((video:any) => ({
+                    ...video,
                     CardClick: (data: any) => {
                         // You can customize this function as needed
                         console.log("Card clicked:", data);
@@ -192,6 +214,10 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
             window.scrollTo({ top: 0, behavior: "smooth" }); 
         }
     }, [ViewTutorialOpen]);
+
+    const FormatedImageURL = (URL: string) => {
+            return `${URL}?${Image_Blob_Key}`;
+        };
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -362,7 +388,7 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
                                 "&::-webkit-scrollbar": { display: "none" },
                             }}
                         >
-                            {videos.map((item, i) => (
+                            {videos.map((item:any, i) => (
                                 <Card
                                     key={i}
                                     onClick={() => { console.log(item, "item"); handleOpen(item) }}
@@ -380,7 +406,8 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
                                     <Box sx={{ position: "relative" }}>
                                         <CardMedia
                                             component="img"
-                                            image={item.image}
+                                            loading="lazy"
+                                            image={FormatedImageURL(item.image)}
                                             alt={item.title}
                                             sx={{ height: 150, objectFit: "cover" }}
                                         />
@@ -528,7 +555,8 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
                                     <Box sx={{ position: "relative" }}>
                                         <CardMedia
                                             component="img"
-                                            image={item.image}
+                                            loading="lazy"
+                                            image={FormatedImageURL(item.image)}
                                             alt={item.title}
                                             sx={{ height: 150, objectFit: "cover" }}
                                         />
@@ -646,7 +674,7 @@ const Tutorials: React.FC<any> = ({ onClose }) => {
                 </Stack>
             ) : (
                 <Stack spacing={6} sx={{ mb: 2, mt: 3, }} px={{ xs: 2, sm: 2, lg: 7 }}>
-                    <ViewTutorial data={ViewTutorialData} onClose={closeBasicDetails} />
+                    <ViewTutorial data={ViewTutorialData} onClose={closeBasicDetails} Groupdata={videos} />
                 </Stack>
             )}
         </Box>

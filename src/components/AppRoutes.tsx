@@ -73,7 +73,7 @@ const AppRoutes = () => {
   // }, []);
 
   useEffect(() => {
-    fetch("/header.html")
+    fetch(process.env.PUBLIC_URL + "/header.html")
       .then((res) => res.text())
       .then((data) => {
         setzlendoHeader(data);
@@ -189,7 +189,8 @@ useEffect(() => {
 
 
   useEffect(() => {
-    fetch("/R_header.html") // or your shared server URL
+    // fetch("/Realty_header.html") 
+    fetch(process.env.PUBLIC_URL + "/Realty_header.html")
       .then((res) => res.text())
       .then((data) => {
         setHtml(data);
@@ -225,7 +226,7 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-    fetch("/R_footer.html") // or your shared server URL
+    fetch(`${process.env.PUBLIC_URL}/R_footer.html`) // or your shared server URL
       .then((res) => res.text())
       .then((data) => {
         setFooter(data);
