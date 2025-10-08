@@ -16,13 +16,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Image_Blob_Key } from "../../store/master/services/config/constant";
 
 interface Project {
     data?:any;
     image: string;
     moreCount: number;
     userName: string;
-    userAvatar: string;
+    profileUrl: string;
     views: string;
     CardClick: (data: any) => void;
 }
@@ -38,11 +39,17 @@ const ProjectCard: React.FC<Project> = ({
     image,
     moreCount,
     userName,
-    userAvatar,
+    profileUrl,
     views,
     CardClick,
-}) => (
-    
+}) =>{
+console.log(`${profileUrl}?${Image_Blob_Key}`,"Image_Blob_Key");
+
+    const FormatedImageURL = (URL: string) => {
+        return `${URL}?${Image_Blob_Key}`;
+    };
+    return (
+
     <Card
     onClick={() => CardClick({ data })}
         sx={{
@@ -55,7 +62,8 @@ const ProjectCard: React.FC<Project> = ({
         <Box sx={{ position: "relative" }}>
             <CardMedia
                 component="img"
-                image={image}
+                loading="lazy"
+                image={FormatedImageURL(image)}
                 alt={userName}
                 sx={{
                     height: 150,
@@ -93,7 +101,7 @@ const ProjectCard: React.FC<Project> = ({
             }}
         >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Avatar src={userAvatar} sx={{ width: 32, height: 32 }} />
+                <Avatar src={FormatedImageURL(profileUrl)} sx={{ width: 32, height: 32 }} />
                 <Typography variant="body1" fontWeight={500}>
                     {userName}
                 </Typography>
@@ -110,7 +118,7 @@ const ProjectCard: React.FC<Project> = ({
             </Box>
         </CardContent>
     </Card>
-);
+)};
 
 const CustomProjectCard: React.FC<CustomProjectCardProps> = ({
     data,
@@ -121,7 +129,7 @@ const CustomProjectCard: React.FC<CustomProjectCardProps> = ({
 
     const handlePageChange = (_: any, value: number) => {
         setPage(value);
-    };
+    };    
 
     const paginatedData = data.slice(
         (page - 1) * itemsPerPage,

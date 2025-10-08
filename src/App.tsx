@@ -323,7 +323,7 @@ function App() {
     <Box sx={{ backgroundColor: "#F7F8FB",}}>
       <ThemeProvider theme={outerTheme} >
       {loading ? <Loading /> : null}
-      <BrowserRouter>
+      <BrowserRouter basename="/app">
         <Routes>
 
           <Route path="/*" element={<AppRoutes/>}/>

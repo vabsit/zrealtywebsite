@@ -3,66 +3,26 @@ import { Box, Typography, List, ListItem, ListItemButton, ListItemText, ListItem
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
-import ShareIcon from '@mui/icons-material/Share';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-const videoList = [
-    {
-        id: "1",
-        title: "Zlendo Realty | How to create floor plan | Interior Design",
-        duration: "4:30",
-        url: "https://www.youtube.com/embed/2qCpY38ompo?si=MUHQtweVnaZZ3o_k",
-        share: "12 K",
-        likes: "12 K",
-    },
-    {
-        id: "2",
-        title: "Zlendo Realty | Choosing the right colors | Color Theory",
-        duration: "3:15",
-        url: "https://www.youtube.com/embed/Df5igmB9MAA?si=FCo5mgC7vExj5Urt",
-        share: "12 K",
-        likes: "12 K",
-    },
-    {
-        id: "3",
-        title: "Zlendo Realty | Furniture arrangement tips | Space Planning",
-        duration: "5:00",
-        url: "https://www.youtube.com/embed/1k2eznTgnXY?si=2iZnOgmWfqvcF1i6",
-        share: "12 K",
-        likes: "12 K",
-    },
-    {
-        id: "4",
-        title: "Zlendo Realty | Lighting for small spaces | Lighting Design",
-        duration: "6:20",
-        url: "https://www.youtube.com/embed/jf2dUCBscA0?si=kqmQJZ4jbb5lvWxj",
-        share: "12 K",
-        likes: "12 K",
-    }
-];
 
-const comments = [
-    { id: 1, user: "Eleanor Pena", text: "@Albert Flores That would be great!", time: "4 hours ago", avatar: "https://i.pravatar.cc/150?img=1" },
-    { id: 2, user: "Harrison Wells", text: "@Darlene Dalton I'm interested in collaborating!", time: "3 hours ago", avatar: "https://i.pravatar.cc/150?img=2" },
-    { id: 3, user: "Sophie Turner", text: "@Henry Cavill Let's set up a meeting!", time: "2 hours ago", avatar: "https://i.pravatar.cc/150?img=3" },
-    { id: 4, user: "John Carter", text: "This tutorial was super helpful, thanks!", time: "1 hour ago", avatar: "https://i.pravatar.cc/150?img=4" },
-    { id: 5, user: "Diana Prince", text: "I loved the design tips here ❤️", time: "30 mins ago", avatar: "https://i.pravatar.cc/150?img=5" },
-];
 interface ViewTutorialProps {
     onClose?: () => void;
     data?: any;
+    Groupdata?: any;
 }
 
 const API_KEY = "AIzaSyCB6NIzLuHBNYdRDlXrmfdNyJx3LPPvGKo";
 
 
 const ViewTutorial: React.FC<ViewTutorialProps> = ({
-    onClose, data,
+    onClose, data, Groupdata
 }) => {
 
+    const selectedVideoIndex = Groupdata.findIndex((video: any) => video.tutorial_Id === data.tutorial_Id);
     const navigate = useNavigate();
-    const [selectedVideo, setSelectedVideo] = useState<any>(videoList[0]);
+    const [selectedVideo, setSelectedVideo] = useState<any>(Groupdata[selectedVideoIndex]);
     const isMobileOrTablet = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down("md")
     );
@@ -88,8 +48,8 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
     };
 
     useEffect(() => {
-        const videoId = getVideoId(selectedVideo.url);
-        console.log(videoId, selectedVideo.url, "videoId");
+        const videoId = getVideoId(selectedVideo.tutorialUrl);
+        console.log(videoId, selectedVideo.tutorialUrl, "videoId");
 
         if (videoId) {
             fetch(
@@ -104,7 +64,7 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                     }
 
                     const formatted = data.items.map((item: any) => ({
-                        id: item.id,
+                        tutorial_Id: item.tutorial_Id,
                         author: item.snippet.topLevelComment.snippet.authorDisplayName,
                         text: item.snippet.topLevelComment.snippet.textDisplay,
                         authorImage:
@@ -132,7 +92,7 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                 });
 
         }
-    }, [selectedVideo.url]);
+    }, [selectedVideo.tutorialUrl]);
 
 
 
@@ -206,7 +166,7 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                 <Box flex={isMobileOrTablet ? "1" : "4"}>
                     <Box
                         component="iframe"
-                        src={selectedVideo.url}
+                        src={selectedVideo.tutorialUrl}
                         width="100%"
                         height="400px"
                         sx={{ borderRadius: 2, border: "none" }}
@@ -299,7 +259,7 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                         ) : (
                             <List>
                                 {comments.map((c: any) => (
-                                    <React.Fragment key={c.id}>
+                                    <React.Fragment key={c.tutorial_Id}>
                                         <ListItem alignItems="flex-start">
                                             <Avatar src={c.authorImage} alt={c.author} sx={{ mr: 2 }} />
                                             <Box>
@@ -307,7 +267,7 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                                                 <Typography variant="body2" color="text.secondary" dangerouslySetInnerHTML={{ __html: c.text }} />
                                             </Box>
                                         </ListItem>
-                                        <Divider component="li" />
+                                        <Divider component="li" sx={{ mt: 1, mb: 1 }} />
                                     </React.Fragment>
                                 ))}
                             </List>
@@ -322,9 +282,16 @@ const ViewTutorial: React.FC<ViewTutorialProps> = ({
                         Video List
                     </Typography>
                     <List>
-                        {videoList.map((video) => (
-                            <ListItem disablePadding key={video.id}>
-                                <ListItemButton onClick={() => setSelectedVideo(video)}>
+                        {Groupdata.map((video: any) => (
+                            <ListItem disablePadding key={video.tutorial_Id}>
+                                {/* <ListItemButton onClick={() => setSelectedVideo(video)}> */}
+                                <ListItemButton
+                                    onClick={() => setSelectedVideo(video)}
+                                    selected={selectedVideo.tutorial_Id === video.tutorial_Id}
+                                    sx={selectedVideo.tutorial_Id === video.tutorial_Id ? {
+                                        backgroundColor: "rgba(0, 128, 128, 0.08)",
+                                        "&:hover": { backgroundColor: "rgba(0, 128, 128, 0.15)" }
+                                    } : {}}>
                                     <ListItemAvatar>
                                         <Avatar sx={{ bgcolor: "teal" }}>
                                             <PlayCircleIcon />

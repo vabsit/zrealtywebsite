@@ -1,34 +1,30 @@
 import {
     Avatar,
-    Box, Button, Card, CardContent, CardMedia, Divider, Grid, IconButton, InputAdornment, Pagination, Stack, TextField, Typography,
+    Box, Button, Card, CardContent, CardMedia, IconButton, Stack, Typography,
 } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
-    ImageList,
-    ImageListItem,
     useMediaQuery,
     useTheme
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShareIcon from "@mui/icons-material/Share";
-import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { loginresponse } from "../../utils/SampletestDatas";
 import { Breadcrumbs, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { Image_Blob_Key } from "../../store/master/services/config/constant";
 
 
 interface AddorEditApplicationProps {
     onClose?: () => void;
     data?: any;
+    FrequentData?: any;
 }
 
 const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
-    onClose, data,
+    onClose, data, FrequentData
 }) => {
 
     const theme = useTheme();
@@ -36,13 +32,13 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
     const navigate = useNavigate();
 
     const CardData = data?.data ? data?.data : []
-    const images = CardData ? CardData.images : []
+    const images = CardData ? CardData.multipleImages : []
+    const ReleventProject = FrequentData ? FrequentData.filter((item:any) => item.library_Id !== CardData.library_Id) : []
     console.log(images, "images");
 
 
     const [index, setIndex] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
-
 
     const handlePrev = () => {
         setIndex((prev) => {
@@ -93,6 +89,10 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
 
     const handleClick = (path: string) => {
         navigate(path);
+    };
+
+    const FormatedImageURL = (URL: string) => {
+        return `${URL}?${Image_Blob_Key}`;
     };
 
     return (
@@ -155,7 +155,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                 }}
                                 
                             >
-                               {CardData.Design_type}
+                               {CardData.design_Type}
                             </Link>
 
                         </Breadcrumbs>
@@ -177,7 +177,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                             mb={4}
                             mt={2}
                         >
-                            {CardData.Design_type}
+                            {CardData.design_Type}
                         </Typography>
                         <Typography
                             variant="subtitle1"
@@ -217,7 +217,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                     </Button>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center", }}>
-                    <Box sx={{ maxWidth: {xs: "350px", sm: "500px", lg:"1000px"}, margin: "auto" }}>
+                    <Box sx={{ maxWidth: {xs: "350px", sm: "500px", lg:"1000px"}, width: "100%" }}>
                         {/* Main Image */}
                         <Box
                             sx={{
@@ -250,7 +250,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
 
                             {images && images?.length > 0 && (
                                 <img
-                                    src={images[index]?.src || "/placeholder.png"}
+                                    src={FormatedImageURL(images[index]?.src) || "/placeholder.png"}
                                     alt=""
                                     style={{
                                         maxHeight: "100%",
@@ -327,7 +327,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                                 <Box
                                                     key={i}
                                                     component="img"
-                                                    src={item?.src}
+                                                    src={FormatedImageURL(item?.src)}
                                                     alt=""
                                                     onClick={() => {
                                                         setIndex(i);
@@ -386,7 +386,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                 margin: "0 auto",
                             }}
                         >
-                            {loginresponse.projects.map((item, i) => (
+                            {ReleventProject.map((item:any, i:number) => (
                                 <Card
                                     key={i}
                                     sx={{
@@ -401,7 +401,8 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                     <Box sx={{ position: "relative" }}>
                                         <CardMedia
                                             component="img"
-                                            image={item.image}
+                                            image={FormatedImageURL(item.image)}
+                                            loading="lazy"
                                             alt={item.userName}
                                             sx={{
                                                 height: 160,
@@ -427,7 +428,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                                 }}
                                             >
                                                 {/* <PhotoLibraryIcon sx={{ fontSize: "18px" }} /> */}
-                                                {item.Design_type}
+                                                {item.design_Type}
                                             </Box>
                                         )}
                                     </Box>
@@ -442,7 +443,7 @@ const LibraryImageViewer: React.FC<AddorEditApplicationProps> = ({
                                         }}
                                     >
                                         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                            <Avatar src={item.userAvatar} sx={{ width: 32, height: 32 }} />
+                                            <Avatar src={FormatedImageURL(item.profileUrl)} sx={{ width: 32, height: 32 }} />
                                             <Typography variant="body1" fontWeight={500}>
                                                 {item.userName}
                                             </Typography>
